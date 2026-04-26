@@ -1,8 +1,8 @@
-export function SparkleIcon() {
+export function SparkleIcon({ className }: { className?: string }) {
   return (
     <svg
       aria-hidden="true"
-      className="block flex-none w-3.5 h-3.5"
+      className={className || 'block flex-none w-3.5 h-3.5'}
       style={{ color: '#fff8fc', filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.65))' }}
       viewBox="0 0 24 24"
     >
