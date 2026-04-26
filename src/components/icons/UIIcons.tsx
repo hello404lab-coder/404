@@ -168,3 +168,21 @@ export function CheckCircleIcon() {
     </svg>
   )
 }
+
+export function ArrowUpRightIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className || 'block flex-none w-4 h-4'}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    >
+      <path d="M7 17L17 7" />
+      <path d="M7 7h10v10" />
+    </svg>
+  )
+}

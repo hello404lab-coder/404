@@ -2,10 +2,10 @@ import type { NavItem, LogoItem } from '../types'
 
 // Navigation data
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', active: true },
-  { label: 'Product', hasChevron: true },
-  { label: 'Story' },
-  { label: 'Use cases' },
+  { label: 'Home', href: '/', active: true },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 // Logo cloud data

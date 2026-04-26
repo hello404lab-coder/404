@@ -1,6 +1,7 @@
 // Navigation types
 export type NavItem = {
   label: string
+  href: string
   active?: boolean
   hasChevron?: boolean
 }

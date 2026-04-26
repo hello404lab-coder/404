@@ -8,6 +8,7 @@ export {
   GitBranchIcon,
   NeuralIcon,
   CheckCircleIcon,
+  ArrowUpRightIcon,
 } from './UIIcons'
 
 // Company Logos

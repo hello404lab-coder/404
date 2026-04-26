@@ -240,7 +240,7 @@ export function Landing() {
           >
             <motion.a
               className="text-[rgba(232,226,242,0.9)] text-[0.94rem] font-normal tracking-[-0.02em] no-underline cursor-pointer"
-              href="#"
+              href="/projects"
               whileHover={prefersReducedMotion ? {} : { color: 'rgba(255,255,255,1)' }}
             >
               Our Work
