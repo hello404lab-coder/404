@@ -1,8 +1,13 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { BoltIcon, NeuralIcon, CheckCircleIcon } from '../icons'
 
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+
 export function RightPanel() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
-    <article
+    <motion.article
       className="relative min-h-[560px] rounded-[34px] overflow-hidden max-[1180px]:min-h-0"
       style={{
         border: '1px solid rgba(148,78,255,0.38)',
@@ -11,20 +16,26 @@ export function RightPanel() {
         boxShadow:
           'inset 0 1px 0 rgba(200,150,255,0.07), 3px 0 28px rgba(140,50,255,0.2), 0 20px 48px rgba(0,0,0,0.44)',
       }}
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
     >
       {/* Glow */}
-      <div
+      <motion.div
         className="absolute pointer-events-none blur-[14px] right-[-60px] top-[-60px] w-[460px] h-[340px]"
         style={{
           background:
             'radial-gradient(circle at 60% 40%, rgba(195,86,255,0.6) 0%, rgba(120,36,230,0.34) 40%, transparent 74%)',
         }}
+        animate={prefersReducedMotion ? {} : { opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
       />
 
       {/* Inner content */}
       <div className="relative z-1 py-[28px] px-[38px] max-[720px]:p-[22px_18px] max-[720px]:pb-7">
         {/* Inference card */}
-        <div
+        <motion.div
           className="relative p-[26px_26px_28px] rounded-[28px]"
           style={{
             border: '1px solid rgba(180,140,255,0.16)',
@@ -33,6 +44,10 @@ export function RightPanel() {
             boxShadow:
               'inset 0 1px 0 rgba(220,190,255,0.06), 0 12px 32px rgba(0,0,0,0.42)',
           }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
           {/* Decorative rails */}
           <div
@@ -48,7 +63,7 @@ export function RightPanel() {
           <div className="flex items-center justify-between gap-[18px] max-[720px]:flex-col max-[720px]:items-start">
             <div className="flex items-center">
               {/* Neural icon avatar */}
-              <div
+              <motion.div
                 className="inline-flex items-center justify-center overflow-hidden rounded-full w-11 h-11 p-[2px] shrink-0 text-[#c084fc]"
                 style={{
                   border: '1px solid rgba(200,115,255,0.55)',
@@ -56,9 +71,12 @@ export function RightPanel() {
                     'radial-gradient(circle at 40% 35%, rgba(210,150,255,0.18), rgba(130,40,230,0.28) 60%, rgba(10,4,22,0.96))',
                   boxShadow: '0 0 18px rgba(170,66,255,0.28)',
                 }}
+                animate={prefersReducedMotion ? {} : { rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
               >
                 <NeuralIcon />
-              </div>
+              </motion.div>
               <div className="ml-3">
                 <div className="text-[rgba(194,179,208,0.74)] text-[0.74rem] tracking-[-0.02em]">
                   Neural Engine
@@ -71,13 +89,15 @@ export function RightPanel() {
 
             <div className="text-left">
               <div className="flex items-center gap-2 text-[rgba(230,222,239,0.88)] text-[0.72rem] tracking-[-0.02em]">
-                <span
+                <motion.span
                   className="w-3 h-3 rounded-full bg-[#9030ff] shrink-0"
                   style={{
                     border: '1px solid rgba(180,90,255,0.88)',
                     boxShadow:
                       '0 0 0 4px rgba(150,49,246,0.28), 0 0 18px rgba(150,49,246,0.52)',
                   }}
+                  animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <span>Active Inference</span>
               </div>
@@ -96,7 +116,7 @@ export function RightPanel() {
           </div>
 
           {/* Prompt card */}
-          <div
+          <motion.div
             className="flex items-center justify-between gap-[18px] mt-4 p-[14px_16px_14px_14px] rounded-[18px]"
             style={{
               border: '1px solid rgba(220,160,255,0.28)',
@@ -105,6 +125,11 @@ export function RightPanel() {
               boxShadow:
                 'inset 0 1px 0 rgba(255,255,255,0.16), 0 0 30px rgba(170,60,255,0.32)',
             }}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3, ease: EASE }}
+            whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
           >
             <div className="flex items-center gap-3">
               <div
@@ -130,12 +155,12 @@ export function RightPanel() {
             <div className="text-[rgba(228,215,239,0.78)] text-[0.76rem] tracking-[-0.03em]">
               1s ago
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Connector line */}
+        {/* Connector line with gradient flow */}
         <div
-          className="relative w-0.5 h-[74px] mx-auto"
+          className="relative w-0.5 h-[74px] mx-auto overflow-hidden"
           style={{
             background:
               'linear-gradient(180deg, rgba(255,255,255,0.8), rgba(202,144,255,0.78))',
@@ -143,6 +168,17 @@ export function RightPanel() {
           }}
           aria-hidden="true"
         >
+          {!prefersReducedMotion && (
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, transparent, rgba(255,255,255,0.8), transparent)',
+              }}
+              animate={{ y: ['-100%', '100%'] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+            />
+          )}
           <span
             className="absolute left-1/2 w-2 h-2 rounded-full bg-[#09020f] -translate-x-1/2 top-[-7px]"
             style={{ border: '2px solid rgba(255,255,255,0.88)' }}
@@ -154,7 +190,7 @@ export function RightPanel() {
         </div>
 
         {/* Solution card */}
-        <div
+        <motion.div
           className="p-[28px_32px] rounded-[28px]"
           style={{
             border: '1px solid rgba(190,150,255,0.22)',
@@ -163,6 +199,10 @@ export function RightPanel() {
             boxShadow:
               'inset 0 1px 0 rgba(255,255,255,0.16), 0 14px 34px rgba(14,5,26,0.38)',
           }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
         >
           <div className="flex justify-between gap-5 text-[rgba(243,238,248,0.96)] text-[0.94rem] tracking-[-0.03em] max-[720px]:flex-col max-[720px]:items-start">
             <span>Solution Synthesized</span>
@@ -171,24 +211,36 @@ export function RightPanel() {
             </span>
           </div>
 
-          <div
+          <motion.div
             className="flex items-center justify-between gap-[18px] w-full mt-8 p-[13px_20px] rounded-[18px] max-[720px]:flex-col max-[720px]:items-start max-[720px]:mt-6"
             style={{
               border: '1px solid rgba(200,170,255,0.2)',
               background:
                 'linear-gradient(180deg, rgba(118,88,168,0.52), rgba(62,40,96,0.72))',
             }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.5, ease: EASE }}
+            whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
           >
             <div className="flex items-center gap-3 text-[rgba(248,243,252,0.96)] text-[0.96rem] tracking-[-0.03em]">
-              <CheckCircleIcon />
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.6, type: 'spring' }}
+              >
+                <CheckCircleIcon />
+              </motion.div>
               <span>Index Optimized +12.4%</span>
             </div>
             <span className="text-[rgba(231,223,238,0.9)] text-[0.84rem] tracking-[-0.03em]">
               10:35 am
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </article>
+    </motion.article>
   )
 }

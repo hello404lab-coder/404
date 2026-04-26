@@ -1,8 +1,13 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { BellIcon, GitBranchIcon } from '../icons'
 
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+
 export function LeftPanel() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
-    <article
+    <motion.article
       className="relative min-h-[560px] rounded-[34px] overflow-hidden max-[1180px]:min-h-0"
       style={{
         border: '1px solid rgba(210,105,48,0.38)',
@@ -11,26 +16,38 @@ export function LeftPanel() {
         boxShadow:
           'inset 0 1px 0 rgba(255,190,130,0.07), -3px 0 28px rgba(255,100,30,0.2), 0 20px 48px rgba(0,0,0,0.44)',
       }}
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: EASE }}
     >
       {/* Glow */}
-      <div
+      <motion.div
         className="absolute pointer-events-none blur-[14px] left-[-80px] top-[-80px] w-[460px] h-[400px]"
         style={{
           background:
             'radial-gradient(circle at 40% 40%, rgba(255,119,40,0.48) 0%, rgba(200,70,18,0.28) 36%, transparent 72%)',
         }}
+        animate={prefersReducedMotion ? {} : { opacity: [0.8, 1, 0.8] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Inner content */}
       <div className="relative z-1 py-[28px] px-[38px] max-[720px]:p-[22px_18px]">
         {/* Header row */}
         <div className="flex items-start justify-between gap-[18px]">
-          <h3 className="mt-[10px] mb-0 max-w-[360px] text-[rgba(244,240,248,0.96)] text-[1.02rem] font-medium tracking-[-0.04em]">
+          <motion.h3
+            className="mt-[10px] mb-0 max-w-[360px] text-[rgba(244,240,248,0.96)] text-[1.02rem] font-medium tracking-[-0.04em]"
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1, ease: EASE }}
+          >
             3 Active Deployments
-          </h3>
+          </motion.h3>
           {/* Bell orb with 404 badge */}
           <div className="relative shrink-0">
-            <div
+            <motion.div
               className="inline-flex items-center justify-center w-[54px] h-[54px] rounded-full text-[#fff0e8]"
               style={{
                 border: '1px solid rgba(255,140,70,0.5)',
@@ -39,24 +56,33 @@ export function LeftPanel() {
                 boxShadow:
                   '0 0 22px rgba(255,100,40,0.36), 0 0 8px rgba(255,150,80,0.24), inset 0 1px 0 rgba(255,220,180,0.2)',
               }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
+              animate={prefersReducedMotion ? {} : { scale: [1, 1.02, 1] }}
             >
               <BellIcon />
-            </div>
+            </motion.div>
             {/* 404 badge */}
-            <span
+            <motion.span
               className="absolute -top-1 -right-1 inline-flex items-center justify-center h-[18px] px-[5px] rounded-full text-[9px] font-bold tracking-tight leading-none text-[#fff0e8]"
               style={{
                 background: 'linear-gradient(135deg, #ff6010, #ff9030)',
                 boxShadow: '0 0 8px rgba(255,90,20,0.7)',
               }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.4, ease: EASE, type: 'spring' }}
             >
               404
-            </span>
+            </motion.span>
           </div>
         </div>
 
         {/* Deployment card */}
-        <div
+        <motion.div
           className="mt-[26px] p-[26px_28px_28px] rounded-[28px] max-[720px]:p-5"
           style={{
             border: '1px solid rgba(200,160,130,0.2)',
@@ -65,10 +91,14 @@ export function LeftPanel() {
             boxShadow:
               'inset 0 1px 0 rgba(255,220,180,0.07), 0 12px 28px rgba(0,0,0,0.45)',
           }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
         >
           <div className="flex items-center max-[720px]:flex-col max-[720px]:items-start">
             {/* Git icon avatar */}
-            <div
+            <motion.div
               className="inline-flex items-center justify-center overflow-hidden rounded-full w-16 h-16 p-[3px] shrink-0 text-[#ffb070]"
               style={{
                 border: '1px solid rgba(255,160,90,0.56)',
@@ -76,9 +106,10 @@ export function LeftPanel() {
                   'radial-gradient(circle at 40% 35%, rgba(255,180,100,0.18), rgba(200,80,20,0.28) 60%, rgba(30,12,6,0.96))',
                 boxShadow: '0 0 18px rgba(255,108,47,0.3)',
               }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
             >
               <GitBranchIcon />
-            </div>
+            </motion.div>
             <div className="ml-[18px]">
               <div className="text-[#f3eef6] text-[1.15rem] font-medium tracking-tighter">
                 Project: Tradovix
@@ -90,7 +121,7 @@ export function LeftPanel() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 mt-[26px] max-[720px]:grid-cols-1">
-            <button
+            <motion.button
               className="h-16 rounded-full text-[rgba(240,234,242,0.94)] text-[0.96rem] font-medium tracking-[-0.04em] cursor-pointer"
               style={{
                 border: '1px solid rgba(255,255,255,0.12)',
@@ -100,10 +131,12 @@ export function LeftPanel() {
                   'inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 12px rgba(0,0,0,0.3)',
               }}
               type="button"
+              whileHover={prefersReducedMotion ? {} : { scale: 1.02, boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 6px 16px rgba(0,0,0,0.4)' }}
+              whileTap={{ scale: 0.98 }}
             >
               View Logs
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               className="h-16 border-0 rounded-full text-[#fff4e0] text-[0.96rem] font-semibold tracking-[-0.03em] cursor-pointer"
               style={{
                 background:
@@ -112,15 +145,17 @@ export function LeftPanel() {
                   '0 8px 22px rgba(255,100,20,0.32), inset 0 1px 0 rgba(255,255,240,0.3)',
               }}
               type="button"
+              whileHover={prefersReducedMotion ? {} : { scale: 1.02, boxShadow: '0 12px 28px rgba(255,100,20,0.4), inset 0 1px 0 rgba(255,255,240,0.35)' }}
+              whileTap={{ scale: 0.98 }}
             >
               Scale Instance
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Pipeline pill */}
         <div className="flex justify-center mt-[26px] mb-[18px]">
-          <button
+          <motion.button
             className="relative h-11 px-7 rounded-full text-[rgba(232,228,238,0.94)] text-[0.92rem] tracking-[-0.03em] cursor-pointer"
             style={{
               border: '1px solid rgba(255,255,255,0.14)',
@@ -130,27 +165,34 @@ export function LeftPanel() {
                 '0 0 0 6px rgba(14,8,20,0.92), 0 0 0 8px rgba(50,36,62,0.55)',
             }}
             type="button"
+            whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
           >
             View Pipeline
-          </button>
+          </motion.button>
         </div>
 
         {/* Footer row */}
-        <div
+        <motion.div
           className="mt-6 h-[110px] rounded-b-[28px] pt-10"
           style={{
             borderTop: '1px solid rgba(255,255,255,0.05)',
             background:
               'linear-gradient(180deg, rgba(12,7,10,0) 0%, rgba(10,5,8,0.28) 20%, rgba(8,4,6,0.58) 100%)',
           }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.4, ease: EASE }}
         >
           <div className="flex items-center">
-            <div
+            <motion.div
               className="inline-flex items-center justify-center overflow-hidden rounded-full w-11 h-11 p-[2px] shrink-0"
               style={{
                 border: '1px solid rgba(255,140,70,0.28)',
                 background: 'rgba(255,100,30,0.08)',
               }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
             >
               <div
                 className="w-full h-full rounded-[inherit] inline-flex items-center justify-center text-[0.72rem] font-bold tracking-tight"
@@ -161,7 +203,7 @@ export function LeftPanel() {
               >
                 404
               </div>
-            </div>
+            </motion.div>
             <div className="ml-[14px] flex w-full justify-between items-center">
               <div className="text-[rgba(239,234,243,0.88)] text-[0.95rem] tracking-[-0.03em]">
                 404 Bot
@@ -171,8 +213,8 @@ export function LeftPanel() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </article>
+    </motion.article>
   )
 }

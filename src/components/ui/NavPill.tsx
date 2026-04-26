@@ -1,17 +1,26 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { NAV_ITEMS } from '../../lib/constants'
 import { HomeIcon, ChevronIcon } from '../icons'
 
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+
 export function NavPill() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
-    <nav
-      className="inline-flex items-center gap-0.5 p-1 border border-[rgba(200,180,255,0.16)] rounded-full max-[720px]:flex-wrap max-[720px]:justify-center max-[720px]:max-w-full"
+    <motion.nav
+      className="inline-flex items-center gap-0.5 p-1 border border-[rgba(200,180,255,0.16)] rounded-full max-[720px]:flex-wrap max-[720px]:justify-center max-[720px]:max-w-full max-[720px]:scale-90"
       style={{
         background: 'linear-gradient(180deg, rgba(28,16,48,0.96), rgba(14,7,26,0.98))',
         boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 0 24px rgba(100,60,180,0.16)',
       }}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
     >
-      {NAV_ITEMS.map((item) => (
-        <a
+      {NAV_ITEMS.map((item, index) => (
+        <motion.a
+          key={item.label}
           className={[
             'inline-flex items-center justify-center gap-[7px] h-[34px] px-4 max-[720px]:px-[14px] rounded-full text-[0.92rem] tracking-tight no-underline cursor-pointer',
             item.active
@@ -29,13 +38,23 @@ export function NavPill() {
               : undefined
           }
           href="#"
-          key={item.label}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.3 + index * 0.05, ease: EASE }}
+          whileHover={
+            prefersReducedMotion
+              ? {}
+              : {
+                  backgroundColor: 'rgba(168,85,247,0.15)',
+                  boxShadow: '0 0 12px rgba(168,85,247,0.3)',
+                }
+          }
         >
           {item.active ? <HomeIcon /> : null}
           <span>{item.label}</span>
           {item.hasChevron ? <ChevronIcon /> : null}
-        </a>
+        </motion.a>
       ))}
-    </nav>
+    </motion.nav>
   )
 }

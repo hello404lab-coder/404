@@ -1,12 +1,62 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons'
 import { LogoCloud } from '../components/ui'
 
+const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
+
 export function HeroSection() {
+  const prefersReducedMotion = useReducedMotion()
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: EASE },
+    },
+  }
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: EASE },
+    },
+  }
+
+  const ctaVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: EASE },
+    },
+  }
+
   return (
-    <section className="flex flex-col items-center text-center">
+    <motion.section
+      className="flex flex-col items-center text-center"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Badge */}
-      <div
+      <motion.div
+        variants={itemVariants}
         className="inline-flex items-center gap-[10px] h-[38px] mb-[30px] px-[18px] rounded-full text-[rgba(248,243,255,0.97)] text-[0.9rem] font-medium tracking-[-0.02em]"
+        whileHover={{ scale: 1.02 }}
         style={{
           border: '1.5px solid transparent',
           background:
@@ -17,11 +67,12 @@ export function HeroSection() {
       >
         <SparkleIcon />
         <span>Next-Gen Software Lab</span>
-      </div>
+      </motion.div>
 
       {/* Title */}
-      <h1
-        className="m-0 max-w-[960px] text-[4.5rem] font-medium leading-[0.98] tracking-[-0.068em] max-[720px]:text-[clamp(2.9rem,12vw,4.2rem)]"
+      <motion.h1
+        variants={titleVariants}
+        className="m-0 max-w-[960px] text-[4.5rem] font-medium leading-[0.98] tracking-[-0.068em] max-[1180px]:text-[3.5rem] max-[720px]:text-[2.2rem] max-[720px]:leading-[1.05]"
         style={{
           background:
             'linear-gradient(175deg, #d6d0dc 0%, #c2baca 45%, #aea5bc 100%)',
@@ -31,18 +82,22 @@ export function HeroSection() {
         }}
       >
         Finding Solutions Where Others See Errors.
-        <br />
-        
-      </h1>
+      </motion.h1>
 
       {/* Subtitle */}
-      <p className="mt-[26px] mb-8 text-[rgba(178,170,190,0.88)] text-[0.97rem] font-normal tracking-[-0.02em] max-[720px]:max-w-[320px] max-[720px]:leading-[1.45]">
-      Custom software, AI integration, and scalable digital architecture designed for the modern enterprise..
-      </p>
+      <motion.p
+        variants={itemVariants}
+        className="mt-[26px] mb-8 text-[rgba(178,170,190,0.88)] text-[0.97rem] font-normal tracking-[-0.02em] max-w-[600px] max-[1180px]:text-[0.9rem] max-[720px]:text-[0.85rem] max-[720px]:px-4"
+      >
+        Custom software, AI integration, and scalable digital architecture designed for the modern enterprise.
+      </motion.p>
 
       {/* CTA */}
-      <button
-        className="h-[58px] px-11 rounded-full text-[#f2eaff] text-base font-medium tracking-[-0.03em] cursor-pointer"
+      <motion.button
+        variants={ctaVariants}
+        whileHover={prefersReducedMotion ? {} : { scale: 1.03, boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 30px rgba(220,85,255,0.9), 0 0 60px rgba(195,60,255,0.7), 0 0 120px rgba(165,30,248,0.5)' }}
+        whileTap={{ scale: 0.98 }}
+        className="h-[58px] px-11 rounded-full text-[#f2eaff] text-base font-medium tracking-[-0.03em] cursor-pointer max-[720px]:h-[50px] max-[720px]:px-8 max-[720px]:text-[0.9rem]"
         style={{
           border: '1.5px solid transparent',
           background:
@@ -53,9 +108,11 @@ export function HeroSection() {
         type="button"
       >
         Start Your Project
-      </button>
+      </motion.button>
 
-      <LogoCloud />
-    </section>
+      <motion.div variants={itemVariants}>
+        <LogoCloud />
+      </motion.div>
+    </motion.section>
   )
 }
