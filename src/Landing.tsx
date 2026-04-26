@@ -79,11 +79,11 @@ export function Landing() {
 
   return (
     <div
-      className="min-h-svh max-[720px]:p-4"
+      className="min-h-svh"
       style={{ background: '#060308' }}
     >
       <div
-        className="relative min-h-[1110px] mx-auto overflow-hidden max-[1180px]:min-h-0 max-[720px]:rounded-[28px]"
+        className="relative min-h-[1110px] mx-auto overflow-hidden max-[1180px]:min-h-0"
         style={{
           background:
             'linear-gradient(180deg, rgba(42,8,61,0.86) 0%, rgba(18,2,29,0.98) 18%, rgba(8,2,13,0.99) 47%, rgba(8,2,13,1) 100%)',
@@ -218,7 +218,7 @@ export function Landing() {
 
         {/* Header */}
         <motion.header
-          className="relative z-2 grid grid-cols-[1fr_auto_1fr] items-center gap-6 pt-9 px-[70px] max-[1180px]:grid-cols-1 max-[1180px]:justify-items-center max-[1180px]:pt-8 max-[1180px]:px-7 max-[720px]:gap-4 max-[720px]:px-[18px]"
+          className="relative z-2 grid grid-cols-[1fr_auto_1fr] items-center gap-6 pt-9 px-[70px] max-[1180px]:grid-cols-1 max-[1180px]:justify-items-center max-[1180px]:pt-8 max-[1180px]:px-7 max-[720px]:flex max-[720px]:flex-col max-[720px]:gap-3 max-[720px]:px-[18px] max-[720px]:pt-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
@@ -233,7 +233,7 @@ export function Landing() {
           </motion.div>
           <NavPill />
           <motion.div
-            className="flex items-center justify-end gap-[18px] max-[1180px]:justify-self-stretch max-[1180px]:justify-center"
+            className="flex items-center justify-end gap-[18px] max-[1180px]:justify-self-stretch max-[1180px]:justify-center max-[720px]:gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.4 }}

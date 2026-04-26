@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAutoAdvance } from './hooks/useAutoAdvance'
 import type { LifecycleStage } from './types'
@@ -223,12 +223,14 @@ function StageNode({
   radius,
   isActive,
   onClick,
+  scale = 1,
 }: {
   stage: LifecycleStage
   angle: number
   radius: number
   isActive: boolean
   onClick: () => void
+  scale?: number
 }) {
   const colors = ACCENT_COLORS[stage.accent]
   const Icon = stage.icon
@@ -237,7 +239,7 @@ function StageNode({
   const x = Math.cos(angle) * radius
   const y = Math.sin(angle) * radius
 
-  const size = isActive ? 72 : 56
+  const size = (isActive ? 72 : 56) * scale
 
   return (
     // Outer wrapper handles positioning ONLY. Framer-motion can't overwrite this transform.
@@ -292,7 +294,19 @@ function CircularDiagram({
   activeIndex: number
   onStageClick: (index: number) => void
 }) {
-  const radius = 200 // Circle radius
+  // Responsive radius based on viewport
+  const [radius, setRadius] = useState(200)
+
+  useEffect(() => {
+    const updateRadius = () => {
+      const isMobile = window.innerWidth <= 720
+      setRadius(isMobile ? 110 : 200)
+    }
+    updateRadius()
+    window.addEventListener('resize', updateRadius)
+    return () => window.removeEventListener('resize', updateRadius)
+  }, [])
+
   const totalStages = stages.length
 
   // Calculate positions for each stage
@@ -311,12 +325,18 @@ function CircularDiagram({
       ' Z'
   }, [stageAngles, radius])
 
+  const containerSize = radius * 2 + 120 // Padding for nodes
+  const viewBoxSize = containerSize / 2
+
   return (
-    <div className="relative w-[520px] h-[520px] max-[720px]:w-[340px] max-[720px]:h-[340px] mx-auto">
+    <div
+      className="relative mx-auto"
+      style={{ width: containerSize, height: containerSize }}
+    >
       {/* SVG Connection Ring - viewBox matches container exactly so SVG coords align with DOM */}
       <svg
         className="absolute inset-0 w-full h-full"
-        viewBox="-260 -260 520 520"
+        viewBox={`-${viewBoxSize} -${viewBoxSize} ${containerSize} ${containerSize}`}
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
@@ -377,14 +397,16 @@ function CircularDiagram({
 
       {/* Center Logo */}
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full flex items-center justify-center"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center"
         style={{
+          width: 96 * (radius / 200),
+          height: 96 * (radius / 200),
           background: 'linear-gradient(135deg, rgba(168,85,247,0.2), rgba(255,140,34,0.2))',
           border: '1px solid rgba(168,85,247,0.4)',
           boxShadow: '0 0 50px rgba(168,85,247,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
         }}
       >
-        <svg viewBox="0 0 40 40" className="w-12 h-12" fill="none">
+        <svg viewBox="0 0 40 40" fill="none" style={{ width: 48 * (radius / 200), height: 48 * (radius / 200) }}>
           <path
             d="M20 5L30 15L20 25L10 15L20 5Z"
             fill="url(#centerGrad)"
@@ -415,6 +437,7 @@ function CircularDiagram({
           radius={radius}
           isActive={i === activeIndex}
           onClick={() => onStageClick(i)}
+          scale={radius / 200}
         />
       ))}
     </div>

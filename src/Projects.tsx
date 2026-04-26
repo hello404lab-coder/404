@@ -278,11 +278,11 @@ export function Projects() {
 
   return (
     <div
-      className="min-h-svh max-[720px]:p-4"
+      className="min-h-svh"
       style={{ background: '#060308' }}
     >
       <div
-        className="relative min-h-[1110px] mx-auto overflow-hidden max-[1180px]:min-h-0 max-[720px]:rounded-[28px]"
+        className="relative min-h-[1110px] mx-auto overflow-hidden max-[1180px]:min-h-0"
         style={{
           background:
             'linear-gradient(180deg, rgba(42,8,61,0.86) 0%, rgba(18,2,29,0.98) 18%, rgba(8,2,13,0.99) 47%, rgba(8,2,13,1) 100%)',
