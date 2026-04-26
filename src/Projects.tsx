@@ -344,25 +344,24 @@ export function Projects() {
 
         {/* Header */}
         <motion.header
-          className="relative z-2 grid grid-cols-[1fr_auto_1fr] items-center gap-6 pt-9 px-[70px] max-[1180px]:grid-cols-1 max-[1180px]:justify-items-center max-[1180px]:pt-8 max-[1180px]:px-7 max-[720px]:gap-4 max-[720px]:px-[18px]"
+          className="relative z-2 grid grid-cols-[1fr_auto_1fr] items-center gap-6 pt-9 px-[70px] max-[1180px]:flex max-[1180px]:justify-between max-[1180px]:flex-wrap max-[1180px]:pt-8 max-[1180px]:px-7 max-[720px]:gap-4 max-[720px]:px-[18px]"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <motion.a
+<motion.a
             href="/"
-            className="text-[rgba(248,244,252,0.97)] text-[1.15rem] font-medium tracking-[-0.04em] max-[1180px]:justify-self-stretch max-[1180px]:text-center no-underline flex items-center gap-2 cursor-pointer"
+            className="text-[rgba(248,244,252,0.97)] text-[1.15rem] font-medium tracking-[-0.04em] max-[1180px]:text-left no-underline flex items-center gap-2 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.4 }}
             whileHover={{ color: 'rgba(255,255,255,1)' }}
           >
-            <HomeIcon />
             404
           </motion.a>
           <NavPill />
           <motion.div
-            className="flex items-center justify-end gap-[18px] max-[1180px]:justify-self-stretch max-[1180px]:justify-center"
+            className="flex items-center justify-center gap-[18px] max-[1180px]:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.4 }}

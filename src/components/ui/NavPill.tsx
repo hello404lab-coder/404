@@ -59,7 +59,7 @@ export function NavPill() {
     <>
       {/* Desktop Nav Pill */}
       <motion.nav
-        className="hidden max-[720px]:hidden md:inline-flex items-center gap-0.5 p-1 border border-[rgba(200,180,255,0.16)] rounded-full"
+        className="hidden max-[1180px]:hidden md:inline-flex items-center gap-0.5 p-1 border border-[rgba(200,180,255,0.16)] rounded-full"
         style={{
           background: 'linear-gradient(180deg, rgba(28,16,48,0.96), rgba(14,7,26,0.98))',
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 0 24px rgba(100,60,180,0.16)',
@@ -104,7 +104,6 @@ export function NavPill() {
                     }
               }
             >
-              {isActive && item.href === '/' ? <HomeIcon /> : null}
               <span>{item.label}</span>
               {item.hasChevron ? <ChevronIcon /> : null}
             </motion.a>
@@ -114,7 +113,7 @@ export function NavPill() {
 
       {/* Mobile Hamburger */}
       <motion.button
-        className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(200,180,255,0.16)] text-[rgba(244,240,252,0.9)]"
+        className="max-[1180px]:flex lg:hidden items-center justify-center w-10 h-10 rounded-full border border-[rgba(200,180,255,0.16)] text-[rgba(244,240,252,0.9)]"
         style={{
           background: 'linear-gradient(180deg, rgba(28,16,48,0.96), rgba(14,7,26,0.98))',
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 0 24px rgba(100,60,180,0.16)',
@@ -131,7 +130,7 @@ export function NavPill() {
           <>
             {/* Backdrop */}
             <motion.div
-              className="md:hidden fixed inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm z-40"
+              className="max-[1180px]:hidden md:flex fixed inset-0 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -141,7 +140,7 @@ export function NavPill() {
 
             {/* Menu Panel */}
             <motion.nav
-              className="md:hidden fixed top-0 right-0 h-full w-[280px] z-50 p-6 pt-20"
+              className="max-[1180px]:flex lg:hidden fixed top-0 right-0 h-full w-[280px] z-50 p-6 pt-20"
               style={{
                 background: 'linear-gradient(180deg, rgba(22,9,42,0.98), rgba(11,4,22,0.99))',
                 borderLeft: '1px solid rgba(148,78,255,0.38)',
@@ -198,7 +197,6 @@ export function NavPill() {
                       onClick={closeMenu}
                       whileTap={{ scale: 0.98 }}
                     >
-                      {isActive && item.href === '/' ? <HomeIcon /> : null}
                       <span>{item.label}</span>
                     </motion.a>
                   )
