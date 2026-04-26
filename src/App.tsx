@@ -1,7 +1,7 @@
-import { MufiLanding } from './MufiLanding'
+import { Landing } from './Landing'
 
 function App() {
-  return <MufiLanding />
+  return <Landing />
 }
 
 export default App
