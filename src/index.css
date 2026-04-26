@@ -21,10 +21,39 @@ body,
 
 body {
   min-height: 100svh;
-  background: #060308;
+  background: #08020d;
 }
 
 #root {
   width: 100%;
   min-height: 100svh;
+}
+
+@keyframes hexScroll {
+  from { background-position-y: 0; }
+  to   { background-position-y: -240px; }
+}
+
+@keyframes connectorFlow {
+  to { stroke-dashoffset: -120; }
+}
+
+@keyframes coreUnderglow {
+  0%, 100% { opacity: 0.55; filter: blur(36px); }
+  50%       { opacity: 0.88; filter: blur(44px); }
+}
+
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes headlineFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollText {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.33%); }
 }
