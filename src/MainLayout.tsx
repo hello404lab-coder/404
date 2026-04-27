@@ -40,6 +40,7 @@ function AnimatedGlow({
 export function MainLayout() {
   const location = useLocation()
   const isProjects = location.pathname.startsWith('/projects')
+  const isHome = location.pathname === '/'
 
   return (
     <div className="min-h-svh" style={{ background: '#060308' }}>
@@ -54,7 +55,7 @@ export function MainLayout() {
       </div>
 
       <div className="relative overflow-hidden" style={{ background: '#08020d' }}>
-        <AnimatedGlow
+        {isProjects && <AnimatedGlow
           className="absolute pointer-events-none left-1/2 -translate-x-1/2"
           style={{
             top: '-220px',
@@ -65,8 +66,8 @@ export function MainLayout() {
             filter: 'blur(12px)',
           }}
           delay={0.1}
-        />
-        {!isProjects && (
+        />}
+        {(isHome ? !isProjects : isProjects) && (
           <>
             <AnimatedGlow
               className="absolute pointer-events-none left-[-4px] top-0 w-80 h-full opacity-[0.92]"
