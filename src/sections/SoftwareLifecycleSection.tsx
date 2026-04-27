@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAutoAdvance } from './hooks/useAutoAdvance'
-import type { LifecycleStage } from './types'
+import { useAutoAdvance } from '../hooks/useAutoAdvance'
+import type { LifecycleStage } from '../types'
 import {
   DiscoverIcon,
   DesignIcon,
@@ -14,7 +14,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   SparkleIcon,
-} from './components/icons'
+} from '../components/icons'
 
 // ─── Stage Data ──────────────────────────────────────────────────────────────
 

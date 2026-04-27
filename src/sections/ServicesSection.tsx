@@ -277,7 +277,7 @@ export function ServicesSection() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="relative z-1 mt-20 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20">
+    <section id="services" className="relative z-1 mt-20 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20">
       {/* Badge */}
       <motion.div
         className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"

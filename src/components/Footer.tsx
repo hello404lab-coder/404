@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-export function SiteFooter() {
+export function Footer() {
   const prefersReducedMotion = useReducedMotion()
 
   return (

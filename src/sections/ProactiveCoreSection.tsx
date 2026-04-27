@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons'
 import { AgentMockup, MetricsMockup } from '../components/mockups'
-import { BENTO_CARD_DARK, BENTO_CELL } from '../lib/styles'
+import { BENTO_CARD_DARK, BENTO_CELL } from '../utils/styles'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
