@@ -1,76 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRightIcon, SparkleIcon } from '../components/icons'
+import { siteContent, type ProjectContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const PROJECTS = [
-  {
-    id: 'enterprise-platform',
-    title: 'Enterprise Platform',
-    category: 'Custom Software',
-    description: 'Scalable B2B platform handling 10M+ transactions daily with 99.99% uptime.',
-    metrics: ['10M+ daily txns', '99.99% uptime', '3x faster deployment'],
-    tech: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-    accent: 'purple' as const,
-    featured: true,
-    image: '/projects/enterprise.jpg',
-  },
-  {
-    id: 'ai-automation',
-    title: 'AI Automation Suite',
-    category: 'AI Integration',
-    description: 'End-to-end workflow automation reducing manual tasks by 85%.',
-    metrics: ['85% reduction', '24/7 operation', '$2M saved/year'],
-    tech: ['Python', 'LLM APIs', 'TensorFlow', 'Kubernetes'],
-    accent: 'gradient' as const,
-    featured: true,
-    image: '/projects/ai-automation.jpg',
-  },
-  {
-    id: 'defi-protocol',
-    title: 'DeFi Protocol',
-    category: 'Blockchain',
-    description: 'Decentralized lending protocol with $50M+ TVL and audited smart contracts.',
-    metrics: ['$50M+ TVL', 'Zero exploits', '12K+ users'],
-    tech: ['Solidity', 'Web3.js', 'The Graph', 'Hardhat'],
-    accent: 'orange' as const,
-    featured: false,
-    image: '/projects/defi.jpg',
-  },
-  {
-    id: 'fintech-mobile',
-    title: 'Fintech Mobile',
-    category: 'Mobile App',
-    description: 'Cross-platform banking app with biometric auth and real-time transfers.',
-    metrics: ['4.9★ rating', '500K+ downloads', '<2s response'],
-    tech: ['React Native', 'Firebase', 'Plaid', 'Stripe'],
-    accent: 'purple' as const,
-    featured: false,
-    image: '/projects/fintech.jpg',
-  },
-  {
-    id: 'healthcare-ai',
-    title: 'Healthcare AI',
-    category: 'AI Integration',
-    description: 'Diagnostic assistance system improving accuracy by 40% for radiology teams.',
-    metrics: ['40% accuracy+', 'HIPAA compliant', '50+ hospitals'],
-    tech: ['PyTorch', 'DICOM', 'FastAPI', 'Azure'],
-    accent: 'gradient' as const,
-    featured: false,
-    image: '/projects/healthcare.jpg',
-  },
-  {
-    id: 'supply-chain',
-    title: 'Supply Chain Tracker',
-    category: 'Blockchain',
-    description: 'End-to-end traceability platform tracking 2M+ products across 40 countries.',
-    metrics: ['2M+ products', '40 countries', 'Real-time tracking'],
-    tech: ['Hyperledger', 'IPFS', 'Go', 'MongoDB'],
-    accent: 'orange' as const,
-    featured: true,
-    image: '/projects/supply-chain.jpg',
-  },
-]
+const PROJECTS = siteContent.projects
 
 const ACCENT_STYLES = {
   purple: {
@@ -144,7 +78,7 @@ function ProjectCard({
   index,
   prefersReducedMotion,
 }: {
-  project: typeof PROJECTS[0]
+  project: ProjectContent
   index: number
   prefersReducedMotion: boolean | null
 }) {

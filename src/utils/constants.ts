@@ -1,30 +1,14 @@
+import { siteContent } from '../data/siteContent'
 import type { NavItem, LogoItem } from '../types'
 
 // Navigation data
-export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', href: '/', active: true },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Contact', href: '/contact' },
-]
+export const NAV_ITEMS: NavItem[] = [...siteContent.navigation]
 
 // Logo cloud data
-export const LOGOS: LogoItem[] = [
-  { name: 'Opendoor' },
-  { name: 'DocuSign' },
-  { name: 'slack', mark: 'slack' },
-  { name: 'splunk>' },
-  { name: 'ATLASSIAN', mark: 'atlassian' },
-]
+export const LOGOS: LogoItem[] = [...siteContent.logos]
 
 // Tech partners data - icons will be assigned after icon extraction
-export const TECH_PARTNERS = [
-  { name: 'OpenAI', iconName: 'OpenAILogoIcon' as const },
-  { name: 'Snowflake', iconName: 'SnowflakeLogoIcon' as const },
-  { name: 'Microsoft', iconName: 'MicrosoftLogoIcon' as const },
-  { name: 'Google', iconName: 'GoogleLogoIcon' as const },
-  { name: 'AWS', iconName: 'AWSLogoIcon' as const },
-]
+export const TECH_PARTNERS = [...siteContent.techPartners]
 
 // Software lifecycle stage IDs for auto-advance
 export const STAGE_IDS = [

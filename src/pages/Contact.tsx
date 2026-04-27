@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { siteContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 const CONTACT_ENDPOINT =
@@ -26,6 +27,8 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
+  const { contact, company } = siteContent
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setStatus(null)
@@ -35,7 +38,7 @@ export function Contact() {
     const trimmedMessage = formValues.message.trim()
 
     if (!trimmedName || !trimmedEmail || !trimmedMessage) {
-      setStatus({ type: 'error', message: 'Please fill in name, email, and message.' })
+      setStatus({ type: 'error', message: contact.requiredError })
       return
     }
 
@@ -62,9 +65,9 @@ export function Contact() {
       }
 
       setFormValues(INITIAL_FORM)
-      setStatus({ type: 'success', message: 'Message sent successfully. We will get back to you soon.' })
+      setStatus({ type: 'success', message: contact.successMessage })
     } catch {
-      setStatus({ type: 'error', message: 'Unable to submit right now. Please try again shortly.' })
+      setStatus({ type: 'error', message: contact.errorMessage })
     } finally {
       setIsSubmitting(false)
     }
@@ -110,16 +113,16 @@ export function Contact() {
             }}
           >
             <span className="text-[0.82rem] font-medium text-[rgba(220,200,255,0.9)] tracking-[-0.01em]">
-              Contact
+              {contact.badge}
             </span>
           </div>
           <h1 className="text-[2.8rem] max-[720px]:text-[2.1rem] font-semibold tracking-[-0.04em] text-[rgba(244,240,252,0.96)] leading-tight mb-3">
-            Let&apos;s build your next
+            {contact.headingPrefix}
             <br />
-            <span className="text-[rgba(168,85,247,0.9)]">high-impact product</span>
+            <span className="text-[rgba(168,85,247,0.9)]">{contact.headingHighlight}</span>
           </h1>
           <p className="text-[1.02rem] font-normal text-[rgba(178,168,196,0.7)] leading-relaxed max-w-[620px]">
-            Tell us about your goals and timelines. We will reply with a practical next step and project direction.
+            {contact.subtitle}
           </p>
         </motion.div>
 
@@ -138,15 +141,15 @@ export function Contact() {
             transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
           >
             <h2 className="text-[1.35rem] font-semibold tracking-[-0.03em] text-[rgba(244,240,252,0.95)] mb-4">
-              Contact Information
+              {contact.infoTitle}
             </h2>
             <p className="text-[0.92rem] text-[rgba(178,168,196,0.68)] leading-relaxed mb-8">
-              Share your idea and we will help scope, design, and ship a solution that fits your stack and team.
+              {contact.infoSubtitle}
             </p>
             <div className="space-y-4">
-              <InfoRow label="Email" value="hello404lab@gmail.com" />
-              <InfoRow label="Phone" value="+91 94967 15606" />
-              <InfoRow label="Location" value="Kochi, Kerala, India" />
+              <InfoRow label="Email" value={company.email} />
+              <InfoRow label="Phone" value={company.phone} />
+              <InfoRow label="Location" value={company.location} />
             </div>
           </motion.section>
 
@@ -164,7 +167,7 @@ export function Contact() {
             transition={{ duration: 0.55, delay: 0.16, ease: EASE }}
           >
             <h2 className="text-[1.35rem] font-semibold tracking-[-0.03em] text-[rgba(244,240,252,0.95)] mb-5">
-              Send a Message
+              {contact.formTitle}
             </h2>
 
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -202,7 +205,7 @@ export function Contact() {
                     setFormValues((prev) => ({ ...prev, message: event.target.value }))
                   }
                   className="mt-2 w-full rounded-xl border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.03)] px-4 py-3 text-[rgba(245,241,251,0.95)] text-[0.92rem] placeholder:text-[rgba(170,155,196,0.65)] outline-none focus:border-[rgba(190,145,255,0.6)] focus:shadow-[0_0_0_3px_rgba(140,50,255,0.2)]"
-                  placeholder="Tell us what you are planning to build..."
+                  placeholder={contact.messagePlaceholder}
                 />
               </label>
 
@@ -241,7 +244,7 @@ export function Contact() {
                 }
                 whileTap={{ scale: 0.99 }}
               >
-                {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
+                {isSubmitting ? contact.submitLoading : contact.submitIdle}
               </motion.button>
             </form>
           </motion.section>
