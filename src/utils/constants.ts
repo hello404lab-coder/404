@@ -5,7 +5,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/', active: true },
   { label: 'Projects', href: '/projects' },
   { label: 'Services', href: '/#services' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 // Logo cloud data
