@@ -4,7 +4,8 @@ import { siteContent, type FounderContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const FOUNDERS = siteContent.founders
+const FOUNDERS = siteContent.founders.items
+const FOUNDERS_SECTION = siteContent.founders.section
 
 const ACCENT_STYLES = {
   purple: {
@@ -204,7 +205,7 @@ export function FoundersSection() {
         transition={{ duration: 0.5, ease: EASE }}
       >
         <SparkleIcon />
-        <span className="text-[rgba(200,170,255,0.9)] text-[0.78rem] font-medium tracking-[-0.01em]">The Team</span>
+        <span className="text-[rgba(200,170,255,0.9)] text-[0.78rem] font-medium tracking-[-0.01em]">{FOUNDERS_SECTION.badge}</span>
       </motion.div>
 
       {/* Headline */}
@@ -216,7 +217,7 @@ export function FoundersSection() {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
       >
-        Meet the Founders
+        {FOUNDERS_SECTION.title}
       </motion.h2>
 
       {/* Subtitle */}
@@ -227,7 +228,7 @@ export function FoundersSection() {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
       >
-        Two builders united by a vision: creating software that solves real problems at scale.
+        {FOUNDERS_SECTION.subtitle}
       </motion.p>
 
       {/* Founders grid */}

@@ -77,10 +77,11 @@ export function Navbar({
               '0 1px 8px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.6)',
           }}
           type="button"
+          onClick={() => navigate(siteContent.navbar.primaryCtaHref)}
           whileHover={prefersReducedMotion ? {} : { scale: 1.03, boxShadow: '0 2px 12px rgba(255,255,255,0.2), inset 0 1px 0 rgba(255,255,255,0.6)' }}
           whileTap={{ scale: 0.98 }}
         >
-          Start Your Project
+          {siteContent.navbar.primaryCtaLabel}
         </motion.button>
       </motion.div>
     </motion.header>

@@ -1,10 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { BoltIcon, NeuralIcon, CheckCircleIcon } from '../icons'
+import { siteContent } from '../../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 export function RightPanel() {
   const prefersReducedMotion = useReducedMotion()
+  const rightCard = siteContent.heroCards.right
 
   return (
     <motion.article
@@ -79,10 +81,10 @@ export function RightPanel() {
               </motion.div>
               <div className="ml-3">
                 <div className="text-[rgba(194,179,208,0.74)] text-[0.74rem] tracking-[-0.02em]">
-                  Neural Engine
+                  {rightCard.label}
                 </div>
                 <div className="mt-0.5 text-[#f4f0f7] text-[0.98rem] font-medium tracking-[-0.04em]">
-                  Inference: Cloud Latency
+                  {rightCard.description}
                 </div>
               </div>
             </div>
@@ -99,17 +101,17 @@ export function RightPanel() {
                   animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 />
-                <span>Active Inference</span>
+                <span>Active Build</span>
               </div>
               <div className="mt-[5px] text-[rgba(187,178,194,0.74)] text-[0.78rem] tracking-[-0.03em]">
-                Running 6 min ago
+                Updated 6 min ago
               </div>
             </div>
           </div>
 
           {/* Data row */}
           <div className="flex justify-between mt-[22px] text-[rgba(228,221,236,0.84)] text-[0.92rem] tracking-[-0.03em] max-[720px]:flex-col max-[720px]:items-start">
-            <span>Data logging</span>
+            <span>API sync</span>
             <span className="text-[rgba(187,178,194,0.74)] text-[0.82rem]">
               Last sync 3s ago
             </span>
@@ -145,10 +147,10 @@ export function RightPanel() {
               </div>
               <div>
                 <div className="text-[rgba(250,245,255,0.98)] text-[0.92rem] font-medium tracking-[-0.04em]">
-                  Analyzing Node Clusters...
+                  Loading Order Flow...
                 </div>
                 <div className="text-[rgba(228,215,239,0.78)] text-[0.76rem] tracking-[-0.03em]">
-                  Evaluating 847 endpoints
+                  Calling 12 endpoints
                 </div>
               </div>
             </div>
@@ -207,7 +209,7 @@ export function RightPanel() {
           <div className="flex justify-between gap-5 text-[rgba(243,238,248,0.96)] text-[0.94rem] tracking-[-0.03em] max-[720px]:flex-col max-[720px]:items-start">
             <span>Solution Synthesized</span>
             <span className="text-[rgba(226,217,236,0.82)] text-[0.82rem]">
-              Autonomous Logic
+              {rightCard.tags.join(' · ')}
             </span>
           </div>
 
@@ -233,7 +235,7 @@ export function RightPanel() {
               >
                 <CheckCircleIcon />
               </motion.div>
-              <span>Index Optimized +12.4%</span>
+              <span>Order Flow Verified</span>
             </div>
             <span className="text-[rgba(231,223,238,0.9)] text-[0.84rem] tracking-[-0.03em]">
               10:35 am

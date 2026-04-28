@@ -2,102 +2,45 @@ import { useMemo, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAutoAdvance } from '../hooks/useAutoAdvance'
 import type { LifecycleStage } from '../types'
+import { siteContent } from '../data/siteContent'
 import {
   DiscoverIcon,
   DesignIcon,
   BuildIcon,
   TestIcon,
   DeployIcon,
-  ObserveIcon,
-  EvolveIcon,
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   SparkleIcon,
 } from '../components/icons'
 
-// ─── Stage Data ──────────────────────────────────────────────────────────────
+const LIFECYCLE_CONTENT = siteContent.lifecycle
 
-const STAGES: LifecycleStage[] = [
-  {
-    id: 'discover',
-    number: 1,
-    title: 'Discover',
-    shortDescription: 'Understand goals, user needs, and market fit.',
-    fullDescription: 'We dive deep into your business objectives, user pain points, and competitive landscape to establish a solid foundation for success.',
-    bullets: ['Stakeholder Interviews', 'Market Research', 'User Journey Mapping', 'Requirement Analysis'],
-    icon: DiscoverIcon,
-    accent: 'purple',
-  },
-  {
-    id: 'design',
-    number: 2,
-    title: 'Design',
-    shortDescription: 'Architect solutions, prototype interfaces, and validate UX before development.',
-    fullDescription: 'We architect intuitive solutions and prototype interfaces before writing a single line of code.',
-    bullets: ['UX Research', 'Wireframing', 'Prototyping', 'Design System'],
-    icon: DesignIcon,
-    accent: 'gradient',
-  },
-  {
-    id: 'build',
-    number: 3,
-    title: 'Build',
-    shortDescription: 'Write clean, scalable code using modern technologies.',
-    fullDescription: 'Our engineering team brings designs to life with clean, maintainable code built for scale.',
-    bullets: ['Agile Development', 'Code Reviews', 'CI/CD Pipeline', 'Documentation'],
-    icon: BuildIcon,
-    accent: 'orange',
-  },
-  {
-    id: 'test',
-    number: 4,
-    title: 'Test',
-    shortDescription: 'Ensure quality, performance, and security.',
-    fullDescription: 'Rigorous testing ensures your product meets the highest standards of quality and reliability.',
-    bullets: ['Unit Testing', 'Integration Testing', 'Performance Testing', 'Security Audits'],
-    icon: TestIcon,
-    accent: 'orange',
-  },
-  {
-    id: 'deploy',
-    number: 5,
-    title: 'Deploy',
-    shortDescription: 'Release to production with confidence and reliability.',
-    fullDescription: 'We handle the deployment process with zero-downtime strategies and comprehensive monitoring.',
-    bullets: ['Staging Environment', 'Blue/Green Deploy', 'Rollback Strategy', 'Post-Deploy Verification'],
-    icon: DeployIcon,
-    accent: 'gradient',
-  },
-  {
-    id: 'observe',
-    number: 6,
-    title: 'Observe',
-    shortDescription: 'Monitor, analyze, and gather insights in real-time.',
-    fullDescription: 'Continuous monitoring provides insights into user behavior, system performance, and business metrics.',
-    bullets: ['Analytics Dashboard', 'Error Tracking', 'User Feedback', 'Performance Metrics'],
-    icon: ObserveIcon,
-    accent: 'gradient',
-  },
-  {
-    id: 'evolve',
-    number: 7,
-    title: 'Evolve',
-    shortDescription: 'Continuously improve and scale with your business.',
-    fullDescription: 'Software is never done. We iterate based on data, user feedback, and changing business needs.',
-    bullets: ['Feature Prioritization', 'A/B Testing', 'Technical Debt', 'Scale Planning'],
-    icon: EvolveIcon,
-    accent: 'purple',
-  },
-]
+const LIFECYCLE_ICONS = {
+  understand: DiscoverIcon,
+  design: DesignIcon,
+  build: BuildIcon,
+  test: TestIcon,
+  launch: DeployIcon,
+} as const
+
+const STAGES: LifecycleStage[] = LIFECYCLE_CONTENT.stages.map((stage) => ({
+  id: stage.id,
+  number: stage.number,
+  title: stage.title,
+  shortDescription: stage.shortDescription,
+  fullDescription: stage.fullDescription,
+  bullets: stage.bullets,
+  accent: stage.accent,
+  icon: LIFECYCLE_ICONS[stage.iconKey],
+}))
 
 const ACCENT_COLORS = {
   purple: { main: '#a855f7', glow: '#a855f7', text: '#c084fc' },
   orange: { main: '#ff8c22', glow: '#ff8c22', text: '#ffb366' },
   gradient: { main: '#c084fc', glow: '#a855f7', text: '#d8b4fe' },
 }
-
-// ─── Detail Card Component ───────────────────────────────────────────────────
 
 function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: number }) {
   const colors = ACCENT_COLORS[stage.accent]
@@ -117,7 +60,6 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
           'inset 0 1px 0 rgba(200,150,255,0.07), 3px 0 28px rgba(140,50,255,0.2), 0 20px 48px rgba(0,0,0,0.44)',
       }}
     >
-      {/* Glow effect */}
       <div
         className="absolute pointer-events-none blur-[14px] right-[-60px] top-[-60px] w-[460px] h-[340px]"
         style={{
@@ -126,9 +68,7 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
         }}
       />
 
-      {/* Content */}
       <div className="relative z-10">
-        {/* Stage number badge */}
         <div className="flex items-center gap-3 mb-5">
           <div
             className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold"
@@ -151,7 +91,6 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
           </div>
         </div>
 
-        {/* Full description */}
         <p
           className="text-sm leading-relaxed mb-5"
           style={{ color: 'rgba(178,168,196,0.7)' }}
@@ -159,7 +98,6 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
           {stage.fullDescription}
         </p>
 
-        {/* Bullets */}
         <div className="space-y-2 mb-6">
           {stage.bullets.map((bullet, idx) => (
             <motion.div
@@ -185,7 +123,6 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
           ))}
         </div>
 
-        {/* Progress bar */}
         <div className="mt-auto">
           <div
             className="h-1 rounded-full overflow-hidden"
@@ -215,8 +152,6 @@ function DetailCard({ stage, progress }: { stage: LifecycleStage; progress: numb
   )
 }
 
-// ─── Circular Stage Node ─────────────────────────────────────────────────────
-
 function StageNode({
   stage,
   angle,
@@ -235,14 +170,12 @@ function StageNode({
   const colors = ACCENT_COLORS[stage.accent]
   const Icon = stage.icon
 
-  // Convert polar to cartesian
   const x = Math.cos(angle) * radius
   const y = Math.sin(angle) * radius
 
   const size = (isActive ? 72 : 56) * scale
 
   return (
-    // Outer wrapper handles positioning ONLY. Framer-motion can't overwrite this transform.
     <div
       className="absolute"
       style={{
@@ -274,7 +207,6 @@ function StageNode({
         whileHover={{ scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       >
-        {/* Icon */}
         <div style={{ color: isActive ? colors.text : 'rgba(178,168,196,0.6)' }}>
           <Icon />
         </div>
@@ -282,8 +214,6 @@ function StageNode({
     </div>
   )
 }
-
-// ─── Circular Diagram Component ────────────────────────────────────────────────
 
 function CircularDiagram({
   stages,
@@ -294,7 +224,6 @@ function CircularDiagram({
   activeIndex: number
   onStageClick: (index: number) => void
 }) {
-  // Responsive radius based on viewport
   const [radius, setRadius] = useState(200)
 
   useEffect(() => {
@@ -309,15 +238,12 @@ function CircularDiagram({
 
   const totalStages = stages.length
 
-  // Calculate positions for each stage
   const stageAngles = useMemo(() => {
     return stages.map((_, i) => {
-      // Start from -90deg (top) and go clockwise
       return -Math.PI / 2 + (i * 2 * Math.PI) / totalStages
     })
   }, [stages, totalStages])
 
-  // Create SVG path for the connection ring
   const ringPath = useMemo(() => {
     const r = radius
     return `M ${r * Math.cos(stageAngles[0])} ${r * Math.sin(stageAngles[0])} ` +
@@ -325,7 +251,7 @@ function CircularDiagram({
       ' Z'
   }, [stageAngles, radius])
 
-  const containerSize = radius * 2 + 120 // Padding for nodes
+  const containerSize = radius * 2 + 120
   const viewBoxSize = containerSize / 2
 
   return (
@@ -333,7 +259,6 @@ function CircularDiagram({
       className="relative mx-auto"
       style={{ width: containerSize, height: containerSize }}
     >
-      {/* SVG Connection Ring - viewBox matches container exactly so SVG coords align with DOM */}
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox={`-${viewBoxSize} -${viewBoxSize} ${containerSize} ${containerSize}`}
@@ -354,7 +279,6 @@ function CircularDiagram({
           </filter>
         </defs>
 
-        {/* Base ring */}
         <motion.path
           d={ringPath}
           fill="none"
@@ -364,7 +288,6 @@ function CircularDiagram({
           strokeDasharray="4 4"
         />
 
-        {/* Animated glow ring */}
         <motion.path
           d={ringPath}
           fill="none"
@@ -382,7 +305,6 @@ function CircularDiagram({
           }}
         />
 
-        {/* Progress indicator along ring */}
         <motion.circle
           r="6"
           fill="#ff8c22"
@@ -395,7 +317,6 @@ function CircularDiagram({
         />
       </svg>
 
-      {/* Center Logo */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center"
         style={{
@@ -428,7 +349,6 @@ function CircularDiagram({
         </svg>
       </div>
 
-      {/* Stage nodes */}
       {stages.map((stage, i) => (
         <StageNode
           key={stage.id}
@@ -443,8 +363,6 @@ function CircularDiagram({
     </div>
   )
 }
-
-// ─── Navigation Component ────────────────────────────────────────────────────
 
 function Navigation({
   total,
@@ -461,7 +379,6 @@ function Navigation({
 }) {
   return (
     <div className="flex items-center justify-center gap-6 mt-8">
-      {/* Prev button */}
       <motion.button
         onClick={onPrev}
         className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer"
@@ -476,7 +393,6 @@ function Navigation({
         <ChevronLeftIcon />
       </motion.button>
 
-      {/* Dots */}
       <div className="flex items-center gap-2">
         {Array.from({ length: total }).map((_, i) => (
           <motion.button
@@ -496,7 +412,6 @@ function Navigation({
         ))}
       </div>
 
-      {/* Next button */}
       <motion.button
         onClick={onNext}
         className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer"
@@ -513,8 +428,6 @@ function Navigation({
     </div>
   )
 }
-
-// ─── Main Section Component ────────────────────────────────────────────────────
 
 export function SoftwareLifecycleSection() {
   const {
@@ -536,7 +449,6 @@ export function SoftwareLifecycleSection() {
       transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
       className="relative z-1 mt-24 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20"
     >
-      {/* Badge */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -550,11 +462,10 @@ export function SoftwareLifecycleSection() {
       >
         <SparkleIcon />
         <span className="text-[rgba(200,170,255,0.9)] text-[0.78rem] font-medium tracking-[-0.01em]">
-          Software Lifecycle
+          {LIFECYCLE_CONTENT.badge}
         </span>
       </motion.div>
 
-      {/* Title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -563,10 +474,9 @@ export function SoftwareLifecycleSection() {
         className="m-0 text-[2.6rem] font-medium leading-[1.1] tracking-tighter mb-4 max-[720px]:text-[2rem]"
         style={{ color: 'rgba(244,240,252,0.96)' }}
       >
-        From Idea to Impact
+        {LIFECYCLE_CONTENT.title}
       </motion.h2>
 
-      {/* Subtitle */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -574,23 +484,20 @@ export function SoftwareLifecycleSection() {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="m-0 text-[rgba(178,168,196,0.7)] text-[1rem] leading-relaxed tracking-[-0.015em] mb-12 max-w-[520px]"
       >
-        A proven process that transforms concepts into production-ready software.
+        {LIFECYCLE_CONTENT.subtitle}
       </motion.p>
 
-      {/* Main content grid */}
       <div
         className="grid grid-cols-[380px_1fr] gap-12 items-center max-[1180px]:grid-cols-1 max-[720px]:gap-8"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Left: Detail Card */}
         <div className="h-[420px] max-[1180px]:h-auto max-[1180px]:order-2">
           <AnimatePresence mode="wait">
             <DetailCard key={activeStage.id} stage={activeStage} progress={progress} />
           </AnimatePresence>
         </div>
 
-        {/* Right: Circular Diagram */}
         <div className="flex flex-col items-center max-[1180px]:order-1">
           <CircularDiagram
             stages={STAGES}
@@ -598,7 +505,6 @@ export function SoftwareLifecycleSection() {
             onStageClick={setActiveIndex}
           />
 
-          {/* Navigation */}
           <Navigation
             total={STAGES.length}
             active={activeIndex}

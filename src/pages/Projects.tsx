@@ -4,7 +4,8 @@ import { siteContent, type ProjectContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const PROJECTS = [...siteContent.projects].reverse()
+const PROJECTS = [...siteContent.projects.items].reverse()
+const PROJECTS_SECTION = siteContent.projects.section
 
 const ACCENT_STYLES = {
   purple: {
@@ -154,21 +155,34 @@ function ProjectCard({
             <SparkleIcon className="w-3.5 h-3.5" />
             {project.category}
           </div>
-          <motion.a
-            className="flex items-center justify-center w-9 h-9 rounded-full cursor-pointer"
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-            }}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit ${project.title} website`}
-            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ArrowUpRightIcon className="w-4 h-4 text-[rgba(244,240,252,0.8)]" />
-          </motion.a>
+          {project.link ? (
+            <motion.a
+              className="flex items-center justify-center w-9 h-9 rounded-full cursor-pointer"
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${project.title} website`}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ArrowUpRightIcon className="w-4 h-4 text-[rgba(244,240,252,0.8)]" />
+            </motion.a>
+          ) : (
+            <motion.div
+              className="flex items-center justify-center w-9 h-9 rounded-full"
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                opacity: 0.7,
+              }}
+            >
+              <ArrowUpRightIcon className="w-4 h-4 text-[rgba(244,240,252,0.8)]" />
+            </motion.div>
+          )}
         </div>
 
         {/* Title & Description */}
@@ -295,18 +309,18 @@ export function Projects() {
             >
               <SparkleIcon className="w-4 h-4 text-[rgba(200,160,255,0.9)]" />
               <span className="text-[0.82rem] font-medium text-[rgba(220,200,255,0.9)] tracking-[-0.01em]">
-                Our Portfolio
+                {PROJECTS_SECTION.badge}
               </span>
             </div>
 
             <h1 className="text-[2.8rem] max-[720px]:text-[2.2rem] font-semibold tracking-[-0.04em] text-[rgba(244,240,252,0.96)] leading-tight mb-4">
-              Projects that define<br />
-              <span className="text-[rgba(168,85,247,0.9)]">excellence</span>
+              {PROJECTS_SECTION.headlinePrefix}
+              <br />
+              <span className="text-[rgba(168,85,247,0.9)]">{PROJECTS_SECTION.headlineHighlight}</span>
             </h1>
 
             <p className="text-[1.05rem] font-normal text-[rgba(178,168,196,0.7)] leading-relaxed">
-              Every project is a testament to our commitment to quality, innovation, and measurable results.
-              From startups to enterprise, we build what matters.
+              {PROJECTS_SECTION.subtitle}
             </p>
           </motion.div>
 

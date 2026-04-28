@@ -5,7 +5,7 @@ import { siteContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 const CONTACT_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbxFu5Btwv-6b9pCh8mQdNB0vtGKon4FQLNH3Q38B4SZptrTgU5mrA1PE0ObdzfI6x_yQw/exec'
+  'https://script.google.com/macros/s/AKfycbwPtZTEVxLWcSudrAwioqnHPC_IkAao-a0UrvvYPAL8MiB7Zd1JH9mJVFCR0b9iNSEnLw/exec'
 
 type FormValues = {
   name: string

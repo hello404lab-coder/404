@@ -6,6 +6,7 @@ const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 export function LogoCloud() {
   const prefersReducedMotion = useReducedMotion()
+  if (LOGOS.length === 0) return null
 
   const containerVariants = {
     hidden: { opacity: 0 },
