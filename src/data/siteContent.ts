@@ -19,10 +19,24 @@ export type HeroContent = {
   badge: string
   headline: string
   subtext: string
+  microLine: string
   audienceQualifier: string
   trustSignal: string
   primaryCta: { label: string; href: string }
   secondaryCta: { label: string; href: string }
+}
+
+export type HeroCardsContent = {
+  left: {
+    label: string
+    description: string
+    tags: string[]
+  }
+  right: {
+    label: string
+    description: string
+    tags: string[]
+  }
 }
 
 export type ServiceContent = {
@@ -101,15 +115,30 @@ export const siteContent = {
   },
   hero: {
     badge: 'Product Engineering Team',
-    headline: 'We Build Real-World Web & Mobile Products for Startups',
+    headline: 'We Build Real-World Digital Products',
     subtext:
       'From idea to production - we design, build, and ship applications that people actually use.',
-    audienceQualifier: 'We work with startups, founders, and growing businesses.',
+    microLine: 'Built for performance, clarity, and real-world usage.',
+    audienceQualifier: 'We work with startups, businesses, and growing teams.',
     trustSignal:
-      'We also work on private client systems that cannot be publicly showcased.',
-    primaryCta: { label: 'View Our Work', href: '/projects' },
-    secondaryCta: { label: 'Start a Project', href: '/contact' },
+      "We also work on private client systems that can't be publicly showcased.",
+    primaryCta: { label: 'Start a Project', href: '/contact' },
+    secondaryCta: { label: 'View Our Work', href: '/projects' },
   } satisfies HeroContent,
+  heroCards: {
+    left: {
+      label: 'Web Applications & Platforms',
+      description:
+        'Dashboards, business systems, and platforms built for real-world use.',
+      tags: ['React', 'Django', 'FastAPI'],
+    },
+    right: {
+      label: 'Mobile Applications',
+      description:
+        'Cross-platform apps designed for performance and usability.',
+      tags: ['Flutter', 'API-driven'],
+    },
+  } satisfies HeroCardsContent,
   logos: [] satisfies LogoItem[],
   techPartners: [
     { name: 'OpenAI', iconName: 'OpenAILogoIcon' as const },
@@ -246,37 +275,36 @@ export const siteContent = {
     badge: 'What You Get When You Work With Us',
     headline: 'Real engineering. Real outcomes.',
     subtitle:
-      'A small, senior team that ships practical software - no buzzwords, no overselling.',
+      'Built from real projects - across fintech, e-commerce, and industrial platforms.',
+    footerNote:
+      "These are not best practices - they are things we've learned by building real products.",
     items: [
       {
         id: 'scalable',
         mockupKey: 'agent',
-        title: 'Architecture that scales with you',
+        title: "Architecture that doesn't break as you grow",
         description:
-          'A foundation that holds up as your users, team, and feature set grow - without a rewrite every year.',
+          "We design systems that handle more users, more data, and more features - without forcing a rebuild every few months.",
       },
       {
         id: 'ui',
         largeTitle: true,
-        title: 'Interfaces that feel obvious',
-        shortDesc:
-          'Clean, calm UI that real users can navigate without a manual.',
-        longDesc:
-          'We sweat layout, spacing, motion, and feedback so the product feels intuitive on day one and easier to support over time.',
+        title: "Interfaces your users don't struggle with",
+        description:
+          'Clear, intuitive UI so users can navigate your product without confusion - reducing support issues and drop-offs.',
       },
       {
         id: 'fast',
         mockupKey: 'metrics',
-        title: 'Fast where it matters',
+        title: 'Fast on real devices, not just demos',
         description:
-          'Snappy screens, quick loads, and smooth interactions - measured on the devices and networks your users actually have.',
+          'We optimize for actual usage - slower networks, mobile devices, and real-world conditions your users deal with daily.',
       },
       {
         id: 'reliable',
-        title: 'Releases you can trust',
-        shortDesc: 'Predictable deploys backed by clean, maintainable code.',
-        longDesc:
-          'CI/CD, monitoring, and a codebase the next engineer can read - so launches stay calm and adding the next feature does not break the last one.',
+        title: "Releases that don't break your product",
+        description:
+          "Clean structure and proper deployment practices ensure updates don't introduce new issues or downtime.",
       },
     ] satisfies CapabilityContent[],
   },
@@ -430,7 +458,7 @@ export const siteContent = {
         accent: 'orange',
         featured: true,
         image: VoxpayImage,
-        link: '',
+        link: 'https://www.voxpay.in',
         githubLink: null,
       },
       {

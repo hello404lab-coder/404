@@ -100,6 +100,13 @@ export function HeroSection() {
         variants={itemVariants}
         className="mt-[-12px] mb-7 text-[rgba(178,168,196,0.76)] text-[0.9rem] font-normal tracking-[-0.015em] max-w-[560px] max-[720px]:text-[0.82rem] max-[720px]:px-4"
       >
+        {hero.microLine}
+      </motion.p>
+
+      <motion.p
+        variants={itemVariants}
+        className="mt-[-12px] mb-7 text-[rgba(178,168,196,0.76)] text-[0.9rem] font-normal tracking-[-0.015em] max-w-[560px] max-[720px]:text-[0.82rem] max-[720px]:px-4"
+      >
         {hero.audienceQualifier}
       </motion.p>
 
