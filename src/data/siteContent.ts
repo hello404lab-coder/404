@@ -1,6 +1,14 @@
 import type { LogoItem, NavItem } from '../types'
 import SahalImage from '../assets/sahal.png'
 import FayasImage from '../assets/fayas.jpeg'
+import AmanimotorsImage from '../assets/projects/amanimotors.jpeg'
+import LuxemotoImage from '../assets/projects/luxmoto.png'
+import PremierSteelsImage from '../assets/projects/premiersteels.jpeg'
+import AlitaMomentsImage from '../assets/projects/alitamoments.jpeg'
+import BeSaLabsImage from '../assets/projects/besalabs.jpeg'
+import LeaflyfImage from '../assets/projects/leaflyf.jpeg'
+import MirthCollectiveImage from '../assets/projects/mirth.jpeg'
+import VoxpayImage from '../assets/projects/voxpay.jpeg'
 
 type Accent = 'purple' | 'orange' | 'gradient'
 type ServiceIconKey = 'software' | 'ai' | 'blockchain' | 'agentic' | 'cloud' | 'security'
@@ -25,6 +33,8 @@ export type ProjectContent = {
   accent: Accent
   featured: boolean
   image: string
+  link: string
+  githubLink: string | null
 }
 
 export type FounderContent = {
@@ -122,70 +132,116 @@ export const siteContent = {
   ] satisfies ServiceContent[],
   projects: [
     {
-      id: 'enterprise-platform',
-      title: 'Enterprise Platform',
-      category: 'Custom Software',
-      description: 'Scalable B2B platform handling 10M+ transactions daily with 99.99% uptime.',
-      metrics: ['10M+ daily txns', '99.99% uptime', '3x faster deployment'],
-      tech: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
+      id: 'amanimotors',
+      title: 'Amanimotors',
+      category: 'Auto E-commerce',
+      description:
+        'Premium used-car showcase with live inventory, smooth GSAP storytelling, and a Go-powered backend.',
+      metrics: ['Premium UX', 'GSAP storytelling', 'Live inventory'],
+      tech: ['React', 'GSAP', 'Tailwind', 'GoLang'],
       accent: 'purple',
       featured: true,
-      image: '/projects/enterprise.jpg',
+      image: AmanimotorsImage,
+      link: 'https://amanimotors.in',
+      githubLink: 'https://github.com/fayasPA/amani-motors',
     },
     {
-      id: 'ai-automation',
-      title: 'AI Automation Suite',
-      category: 'AI Integration',
-      description: 'End-to-end workflow automation reducing manual tasks by 85%.',
-      metrics: ['85% reduction', '24/7 operation', '$2M saved/year'],
-      tech: ['Python', 'LLM APIs', 'TensorFlow', 'Kubernetes'],
-      accent: 'gradient',
-      featured: true,
-      image: '/projects/ai-automation.jpg',
-    },
-    {
-      id: 'defi-protocol',
-      title: 'DeFi Protocol',
-      category: 'Blockchain',
-      description: 'Decentralized lending protocol with $50M+ TVL and audited smart contracts.',
-      metrics: ['$50M+ TVL', 'Zero exploits', '12K+ users'],
-      tech: ['Solidity', 'Web3.js', 'The Graph', 'Hardhat'],
+      id: 'luxemoto',
+      title: 'LuxeMoto',
+      category: 'Auto E-commerce',
+      description:
+        'High-end used-car catalog with cinematic scroll, real-time inventory, and a Go + PostgreSQL backend.',
+      metrics: ['Cinematic scroll', 'Real-time catalog', 'Go + PostgreSQL'],
+      tech: ['React', 'GSAP', 'Tailwind', 'GoLang'],
       accent: 'orange',
       featured: false,
-      image: '/projects/defi.jpg',
+      image: LuxemotoImage,
+      link: 'https://luxemoto.in',
+      githubLink: 'https://github.com/fayasPA/luxe-moto',
     },
     {
-      id: 'fintech-mobile',
-      title: 'Fintech Mobile',
-      category: 'Mobile App',
-      description: 'Cross-platform banking app with biometric auth and real-time transfers.',
-      metrics: ['4.9★ rating', '500K+ downloads', '<2s response'],
-      tech: ['React Native', 'Firebase', 'Plaid', 'Stripe'],
+      id: 'premier-steels',
+      title: 'Premier Steels',
+      category: 'Industrial Web',
+      description:
+        'Brand-led website for a steel distribution company built around a clean catalog and motion-driven hero.',
+      metrics: ['Brand-led design', 'Distribution catalog', 'Motion hero'],
+      tech: ['React', 'GSAP', 'Tailwind'],
+      accent: 'gradient',
+      featured: false,
+      image: PremierSteelsImage,
+      link: 'https://thepremiersteels.com',
+      githubLink: 'https://github.com/fayasPA/premier_steels',
+    },
+    {
+      id: 'alita-moments',
+      title: 'Alita Moments',
+      category: 'Photography Portfolio',
+      description:
+        'Photography portfolio with cinematic transitions and a story-first gallery experience.',
+      metrics: ['Cinematic transitions', 'Story-first gallery', 'Mobile optimized'],
+      tech: ['React', 'GSAP', 'Tailwind'],
       accent: 'purple',
       featured: false,
-      image: '/projects/fintech.jpg',
+      image: AlitaMomentsImage,
+      link: 'https://alitamoments.com',
+      githubLink: 'https://github.com/fayasPA/alitamoments_photography',
     },
     {
-      id: 'healthcare-ai',
-      title: 'Healthcare AI',
-      category: 'AI Integration',
-      description: 'Diagnostic assistance system improving accuracy by 40% for radiology teams.',
-      metrics: ['40% accuracy+', 'HIPAA compliant', '50+ hospitals'],
-      tech: ['PyTorch', 'DICOM', 'FastAPI', 'Azure'],
+      id: 'leaflyf',
+      title: 'Leaflyf',
+      category: 'eCommerce',
+      description:
+        'Storefront for premium exotic vegetables and fruits with a curated catalog and clean checkout flow.',
+      metrics: ['Curated catalog', 'Storefront commerce', 'Pan-India delivery'],
+      tech: ['React', 'Tailwind', 'Headless CMS', 'Node.js'],
       accent: 'gradient',
       featured: false,
-      image: '/projects/healthcare.jpg',
+      image: LeaflyfImage,
+      link: 'https://www.leaflyf.com',
+      githubLink: null,
     },
     {
-      id: 'supply-chain',
-      title: 'Supply Chain Tracker',
-      category: 'Blockchain',
-      description: 'End-to-end traceability platform tracking 2M+ products across 40 countries.',
-      metrics: ['2M+ products', '40 countries', 'Real-time tracking'],
-      tech: ['Hyperledger', 'IPFS', 'Go', 'MongoDB'],
+      id: 'mirth-collective',
+      title: 'Mirth Collective',
+      category: 'Brand & Lifestyle',
+      description:
+        'Editorial-led brand site for a lifestyle collective with custom motion and a bold visual identity.',
+      metrics: ['Editorial layout', 'Custom motion', 'Brand-first design'],
+      tech: ['React', 'GSAP', 'Tailwind', 'Sanity'],
+      accent: 'purple',
+      featured: false,
+      image: MirthCollectiveImage,
+      link: 'https://www.mirthcollective.com',
+      githubLink: null,
+    },
+    {
+      id: 'besalabs',
+      title: 'BeSa Labs',
+      category: 'Industrial 3D',
+      description:
+        'Marketing site for a precision 3D scanning, reverse engineering, and inspection studio.',
+      metrics: ['Precision 3D scans', 'Inspection workflows', 'Reverse engineering'],
+      tech: ['React', 'Tailwind', 'GSAP', 'Node.js'],
       accent: 'orange',
       featured: true,
-      image: '/projects/supply-chain.jpg',
+      image: BeSaLabsImage,
+      link: 'https://www.besalabs.in',
+      githubLink: null,
+    },
+    {
+      id: 'voxpay',
+      title: 'VOXPAY',
+      category: 'Fintech Mobile',
+      description:
+        'Neo-banking partner mobile web app for online payment transfer, recharges, and cash management. Private build (not publicly accessible).',
+      metrics: ['Money transfer', 'Bill & recharge', 'Cash management'],
+      tech: ['React Native', 'Node.js', 'PostgreSQL', 'Razorpay'],
+      accent: 'orange',
+      featured: true,
+      image: VoxpayImage,
+      link: 'https://voxpay.in',
+      githubLink: null,
     },
   ] satisfies ProjectContent[],
   founders: [

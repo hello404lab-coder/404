@@ -4,7 +4,7 @@ import { siteContent, type ProjectContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const PROJECTS = siteContent.projects
+const PROJECTS = [...siteContent.projects].reverse()
 
 const ACCENT_STYLES = {
   purple: {
