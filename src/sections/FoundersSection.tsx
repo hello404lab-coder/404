@@ -1,30 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons'
-import SahalImage from '../assets/sahal.png'
-import FayasImage from '../assets/fayas.jpeg'
+import { siteContent, type FounderContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const FOUNDERS = [
-  {
-    name: 'Sahal',
-    role: 'Technical Lead',
-    tagline: 'Engineering that scales',
-    description: 'Architecting robust systems and AI solutions that power the modern enterprise.',
-    image: SahalImage,
-    accent: 'purple' as const,
-    skills: ['System Architecture', 'AI/ML', 'Cloud Infrastructure'],
-  },
-  {
-    name: 'Fayas',
-    role: 'Growth & Strategy',
-    tagline: 'Strategy that delivers',
-    description: 'Driving market expansion and building lasting partnerships that fuel growth.',
-    image: FayasImage,
-    accent: 'orange' as const,
-    skills: ['Business Development', 'Marketing', 'Client Relations'],
-  },
-]
+const FOUNDERS = siteContent.founders
 
 const ACCENT_STYLES = {
   purple: {
@@ -56,7 +36,7 @@ function FounderCard({
   index,
   prefersReducedMotion,
 }: {
-  founder: typeof FOUNDERS[0]
+  founder: FounderContent
   index: number
   prefersReducedMotion: boolean | null
 }) {

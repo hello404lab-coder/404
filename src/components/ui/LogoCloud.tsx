@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { LOGOS } from '../../lib/constants'
+import { LOGOS } from '../../utils/constants'
 import { SlackMark, AtlassianMark } from '../icons'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]

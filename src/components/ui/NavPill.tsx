@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
-import { NAV_ITEMS } from '../../lib/constants'
-import { HomeIcon, ChevronIcon } from '../icons'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { NAV_ITEMS } from '../../utils/constants'
+import { ChevronIcon } from '../icons'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -49,11 +49,17 @@ function MenuIcon({ isOpen }: { isOpen: boolean }) {
 export function NavPill() {
   const prefersReducedMotion = useReducedMotion()
   const location = useLocation()
+  const navigate = useNavigate()
   const currentPath = location.pathname
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string, shouldCloseMenu = false) => {
+    event.preventDefault()
+    navigate(href)
+    if (shouldCloseMenu) closeMenu()
+  }
 
   return (
     <>
@@ -92,6 +98,7 @@ export function NavPill() {
                   : undefined
               }
               href={item.href}
+              onClick={(event) => handleNavClick(event, item.href)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 + index * 0.05, ease: EASE }}
@@ -194,7 +201,7 @@ export function NavPill() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.05, ease: EASE }}
-                      onClick={closeMenu}
+                      onClick={(event) => handleNavClick(event, item.href, true)}
                       whileTap={{ scale: 0.98 }}
                     >
                       <span>{item.label}</span>
@@ -217,7 +224,7 @@ export function NavPill() {
                     border: '1.5px solid rgba(220,215,230,0.82)',
                     boxShadow: '0 1px 8px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.6)',
                   }}
-                  onClick={closeMenu}
+                  onClick={(event) => handleNavClick(event, '/#contact', true)}
                 >
                   Start Your Project
                 </a>

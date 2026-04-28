@@ -1,77 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRightIcon, SparkleIcon, HomeIcon } from './components/icons'
-import { NavPill, SiteFooter } from './components/ui'
+import { ArrowUpRightIcon, SparkleIcon } from '../components/icons'
+import { siteContent, type ProjectContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const PROJECTS = [
-  {
-    id: 'enterprise-platform',
-    title: 'Enterprise Platform',
-    category: 'Custom Software',
-    description: 'Scalable B2B platform handling 10M+ transactions daily with 99.99% uptime.',
-    metrics: ['10M+ daily txns', '99.99% uptime', '3x faster deployment'],
-    tech: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-    accent: 'purple' as const,
-    featured: true,
-    image: '/projects/enterprise.jpg',
-  },
-  {
-    id: 'ai-automation',
-    title: 'AI Automation Suite',
-    category: 'AI Integration',
-    description: 'End-to-end workflow automation reducing manual tasks by 85%.',
-    metrics: ['85% reduction', '24/7 operation', '$2M saved/year'],
-    tech: ['Python', 'LLM APIs', 'TensorFlow', 'Kubernetes'],
-    accent: 'gradient' as const,
-    featured: true,
-    image: '/projects/ai-automation.jpg',
-  },
-  {
-    id: 'defi-protocol',
-    title: 'DeFi Protocol',
-    category: 'Blockchain',
-    description: 'Decentralized lending protocol with $50M+ TVL and audited smart contracts.',
-    metrics: ['$50M+ TVL', 'Zero exploits', '12K+ users'],
-    tech: ['Solidity', 'Web3.js', 'The Graph', 'Hardhat'],
-    accent: 'orange' as const,
-    featured: false,
-    image: '/projects/defi.jpg',
-  },
-  {
-    id: 'fintech-mobile',
-    title: 'Fintech Mobile',
-    category: 'Mobile App',
-    description: 'Cross-platform banking app with biometric auth and real-time transfers.',
-    metrics: ['4.9★ rating', '500K+ downloads', '<2s response'],
-    tech: ['React Native', 'Firebase', 'Plaid', 'Stripe'],
-    accent: 'purple' as const,
-    featured: false,
-    image: '/projects/fintech.jpg',
-  },
-  {
-    id: 'healthcare-ai',
-    title: 'Healthcare AI',
-    category: 'AI Integration',
-    description: 'Diagnostic assistance system improving accuracy by 40% for radiology teams.',
-    metrics: ['40% accuracy+', 'HIPAA compliant', '50+ hospitals'],
-    tech: ['PyTorch', 'DICOM', 'FastAPI', 'Azure'],
-    accent: 'gradient' as const,
-    featured: false,
-    image: '/projects/healthcare.jpg',
-  },
-  {
-    id: 'supply-chain',
-    title: 'Supply Chain Tracker',
-    category: 'Blockchain',
-    description: 'End-to-end traceability platform tracking 2M+ products across 40 countries.',
-    metrics: ['2M+ products', '40 countries', 'Real-time tracking'],
-    tech: ['Hyperledger', 'IPFS', 'Go', 'MongoDB'],
-    accent: 'orange' as const,
-    featured: true,
-    image: '/projects/supply-chain.jpg',
-  },
-]
+const PROJECTS = [...siteContent.projects].reverse()
 
 const ACCENT_STYLES = {
   purple: {
@@ -145,7 +78,7 @@ function ProjectCard({
   index,
   prefersReducedMotion,
 }: {
-  project: typeof PROJECTS[0]
+  project: ProjectContent
   index: number
   prefersReducedMotion: boolean | null
 }) {
@@ -221,17 +154,21 @@ function ProjectCard({
             <SparkleIcon className="w-3.5 h-3.5" />
             {project.category}
           </div>
-          <motion.button
+          <motion.a
             className="flex items-center justify-center w-9 h-9 rounded-full cursor-pointer"
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
             }}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${project.title} website`}
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
             whileTap={{ scale: 0.95 }}
           >
             <ArrowUpRightIcon className="w-4 h-4 text-[rgba(244,240,252,0.8)]" />
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* Title & Description */}
@@ -277,10 +214,7 @@ export function Projects() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <div
-      className="min-h-svh"
-      style={{ background: '#060308' }}
-    >
+    <>
       <div
         className="relative min-h-[1110px] mx-auto overflow-hidden max-[1180px]:min-h-0"
         style={{
@@ -342,53 +276,6 @@ export function Projects() {
           />
         </div>
 
-        {/* Header */}
-        <motion.header
-          className="relative z-2 grid grid-cols-[1fr_auto_1fr] items-center gap-6 pt-9 px-[70px] max-[1180px]:flex max-[1180px]:justify-between max-[1180px]:flex-wrap max-[1180px]:pt-8 max-[1180px]:px-7 max-[720px]:gap-4 max-[720px]:px-[18px]"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE }}
-        >
-<motion.a
-            href="/"
-            className="text-[rgba(248,244,252,0.97)] text-[1.15rem] font-medium tracking-[-0.04em] max-[1180px]:text-left no-underline flex items-center gap-2 cursor-pointer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-            whileHover={{ color: 'rgba(255,255,255,1)' }}
-          >
-            404
-          </motion.a>
-          <NavPill />
-          <motion.div
-            className="flex items-center justify-center gap-[18px] max-[1180px]:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-          >
-            <motion.a
-              className="text-[rgba(232,226,242,0.9)] text-[0.94rem] font-normal tracking-[-0.02em] no-underline cursor-pointer"
-              href="/#services"
-              whileHover={prefersReducedMotion ? {} : { color: 'rgba(255,255,255,1)' }}
-            >
-              Services
-            </motion.a>
-            <motion.button
-              className="h-9 px-5 rounded-full bg-[#f0ecf6] text-[#0a0510] text-[0.92rem] font-semibold tracking-[-0.03em] cursor-pointer"
-              style={{
-                border: '1.5px solid rgba(220,215,230,0.82)',
-                boxShadow:
-                  '0 1px 8px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.6)',
-              }}
-              type="button"
-              whileHover={prefersReducedMotion ? {} : { scale: 1.03, boxShadow: '0 2px 12px rgba(255,255,255,0.2), inset 0 1px 0 rgba(255,255,255,0.6)' }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Start Your Project
-            </motion.button>
-          </motion.div>
-        </motion.header>
-
         {/* Main Content */}
         <main className="relative z-1 pt-[84px] px-[70px] pb-[70px] max-[1180px]:pt-16 max-[1180px]:px-7 max-[1180px]:pb-[34px] max-[720px]:pt-10 max-[720px]:px-[18px] max-[720px]:pb-[22px]">
           {/* Section Header */}
@@ -437,20 +324,6 @@ export function Projects() {
         </main>
       </div>
 
-      {/* Footer */}
-      <div className="relative overflow-hidden" style={{ background: '#08020d' }}>
-        <AnimatedGlow
-          className="absolute pointer-events-none left-1/2 -translate-x-1/2"
-          style={{
-            top: '-220px', width: '1100px', height: '480px',
-            background:
-              'radial-gradient(ellipse at 50% 50%, rgba(146,72,251,0.22) 0%, rgba(118,49,221,0.12) 30%, transparent 70%)',
-            filter: 'blur(12px)',
-          }}
-          delay={0.1}
-        />
-        <SiteFooter />
-      </div>
-    </div>
+    </>
   )
 }

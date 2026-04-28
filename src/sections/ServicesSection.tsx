@@ -1,104 +1,60 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import type { ReactElement } from 'react'
 import { SparkleIcon } from '../components/icons'
+import { siteContent, type ServiceContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const SERVICES = [
-  {
-    id: 'software',
-    title: 'Custom Software',
-    tagline: 'Built for scale',
-    description: 'End-to-end software development tailored to your business needs. From MVPs to enterprise platforms.',
-    features: ['Full-Stack Development', 'Cloud Architecture', 'API Design', 'DevOps'],
-    accent: 'purple' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M10 20H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-6" />
-        <path d="M10 20l-3-3m3 3l3-3m-3 3v-6" />
-        <path d="M6 8h12M6 12h8" />
-      </svg>
-    ),
-  },
-  {
-    id: 'ai',
-    title: 'AI Integration',
-    tagline: 'Intelligence engineered',
-    description: 'Production-grade AI solutions that automate workflows and unlock insights from your data.',
-    features: ['LLM Integration', 'Predictive Models', 'NLP Pipelines', 'MLOps'],
-    accent: 'gradient' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2a2 2 0 100 4 2 2 0 000-4z" />
-        <path d="M12 22a2 2 0 100-4 2 2 0 000 4z" />
-        <path d="M2 12a2 2 0 104 0 2 2 0 00-4 0z" />
-        <path d="M18 12a2 2 0 104 0 2 2 0 00-4 0z" />
-        <path d="M6 6l2 2M16 6l-2 2M6 18l2-2M16 18l-2-2" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
-    id: 'blockchain',
-    title: 'Blockchain',
-    tagline: 'Trust by design',
-    description: 'Smart contracts and decentralized applications built for security and transparency.',
-    features: ['Smart Contracts', 'DeFi Protocols', 'Web3 Integration', 'Tokenization'],
-    accent: 'orange' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="9" y="3" width="6" height="6" rx="1" />
-        <rect x="3" y="15" width="6" height="6" rx="1" />
-        <rect x="15" y="15" width="6" height="6" rx="1" />
-        <path d="M12 9v3M12 12H9m3 0h3M6 15v-1a2 2 0 012-2h8a2 2 0 012 2v1" />
-      </svg>
-    ),
-  },
-  {
-    id: 'agentic',
-    title: 'Agentic Automation',
-    tagline: 'Autonomous systems',
-    description: 'Self-operating AI agents that handle complex workflows from end to end.',
-    features: ['Autonomous Agents', 'Workflow Automation', 'Decision Engines', '24/7 Operations'],
-    accent: 'purple' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z" />
-        <path d="M12 12l9-4.5" />
-        <path d="M12 12v9" />
-        <path d="M12 12L3 7.5" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-  },
-  {
-    id: 'cloud',
-    title: 'Cloud Solutions',
-    tagline: 'Infrastructure that scales',
-    description: 'Enterprise cloud architecture designed for performance, security, and cost optimization.',
-    features: ['AWS/Azure/GCP', 'Kubernetes', 'Serverless', 'FinOps'],
-    accent: 'gradient' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M17.5 19H9a7 7 0 117-7h.5a5.5 5.5 0 110 11z" />
-        <path d="M12 12v8M8 16l4-4 4 4" />
-      </svg>
-    ),
-  },
-  {
-    id: 'security',
-    title: 'Security & Audit',
-    tagline: 'Protected by default',
-    description: 'Comprehensive security audits and hardening to protect your systems and data.',
-    features: ['Penetration Testing', 'Code Audits', 'Compliance', 'Monitoring'],
-    accent: 'orange' as const,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 3L4 7v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V7l-8-4z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-  },
-]
+const SERVICES = siteContent.services
+
+const SERVICE_ICONS: Record<string, ReactElement> = {
+  software: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 20H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-6" />
+      <path d="M10 20l-3-3m3 3l3-3m-3 3v-6" />
+      <path d="M6 8h12M6 12h8" />
+    </svg>
+  ),
+  ai: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2a2 2 0 100 4 2 2 0 000-4z" />
+      <path d="M12 22a2 2 0 100-4 2 2 0 000 4z" />
+      <path d="M2 12a2 2 0 104 0 2 2 0 00-4 0z" />
+      <path d="M18 12a2 2 0 104 0 2 2 0 00-4 0z" />
+      <path d="M6 6l2 2M16 6l-2 2M6 18l2-2M16 18l-2-2" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  ),
+  blockchain: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="9" y="3" width="6" height="6" rx="1" />
+      <rect x="3" y="15" width="6" height="6" rx="1" />
+      <rect x="15" y="15" width="6" height="6" rx="1" />
+      <path d="M12 9v3M12 12H9m3 0h3M6 15v-1a2 2 0 012-2h8a2 2 0 012 2v1" />
+    </svg>
+  ),
+  agentic: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z" />
+      <path d="M12 12l9-4.5" />
+      <path d="M12 12v9" />
+      <path d="M12 12L3 7.5" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
+  ),
+  cloud: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M17.5 19H9a7 7 0 117-7h.5a5.5 5.5 0 110 11z" />
+      <path d="M12 12v8M8 16l4-4 4 4" />
+    </svg>
+  ),
+  security: (
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 3L4 7v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V7l-8-4z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  ),
+}
 
 const ACCENT_STYLES = {
   purple: {
@@ -150,7 +106,7 @@ function ServiceCard({
   index,
   prefersReducedMotion,
 }: {
-  service: typeof SERVICES[0]
+  service: ServiceContent
   index: number
   prefersReducedMotion: boolean | null
 }) {
@@ -205,7 +161,7 @@ function ServiceCard({
           transition={{ duration: 0.4, delay: 0.1 + index * 0.08, ease: EASE }}
           whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
         >
-          {service.icon}
+          {SERVICE_ICONS[service.iconKey] ?? null}
         </motion.div>
 
         {/* Tagline */}
@@ -277,7 +233,7 @@ export function ServicesSection() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="relative z-1 mt-20 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20">
+    <section id="services" className="relative z-1 mt-20 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20">
       {/* Badge */}
       <motion.div
         className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"

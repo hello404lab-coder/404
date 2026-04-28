@@ -1,6 +1,6 @@
-# FourNotFour - 404 Website
+# Fornotfortech Website
 
-A modern, dark-themed landing page for FourNotFour - a next-gen software lab specializing in custom software, AI integration, and scalable digital architecture.
+A modern, dark-themed React website for fornotfortech, showcasing services, portfolio projects, company capabilities, and a contact flow.
 
 ## Tech Stack
 
@@ -24,7 +24,6 @@ src/
 │   ├── ui/             # Reusable UI components
 │   │   ├── NavPill.tsx
 │   │   ├── LogoCloud.tsx
-│   │   ├── SiteFooter.tsx
 │   │   └── index.ts
 │   ├── panels/         # Dashboard panels
 │   │   ├── LeftPanel.tsx
@@ -34,24 +33,41 @@ src/
 │   │   ├── AgentMockup.tsx
 │   │   ├── MetricsMockup.tsx
 │   │   └── index.ts
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   ├── AnimatedSection.tsx
+│   ├── WhatsAppFloatingButton.tsx
 │   └── shared/         # Shared components
 │       └── HeroSwooshes.tsx
-├── sections/           # Page sections
+├── sections/           # Home and shared page sections
 │   ├── HeroSection.tsx
 │   ├── DashboardSection.tsx
+│   ├── SoftwareLifecycleSection.tsx
+│   ├── ServicesSection.tsx
 │   ├── ProactiveCoreSection.tsx
+│   ├── FoundersSection.tsx
 │   ├── TechPartnersSection.tsx
+│   ├── ProjectsSection.tsx
 │   └── index.ts
 ├── hooks/              # Custom React hooks
-│   └── useAutoAdvance.ts
-├── lib/                # Utilities & constants
+│   ├── useAutoAdvance.ts
+│   ├── useScrollReveal.ts
+│   └── useCountUp.ts
+├── pages/              # Route-level pages
+│   ├── Home.tsx
+│   ├── Projects.tsx
+│   └── Contact.tsx
+├── data/               # Centralized site content/config
+│   └── siteContent.ts
+├── utils/              # Utilities & styling helpers
 │   ├── constants.ts
-│   └── styles.ts
+│   ├── styles.ts
+│   └── ScrollToTop.tsx
 ├── types/              # TypeScript types
 │   └── index.ts
-├── Landing.tsx         # Main page component
-├── SoftwareLifecycleSection.tsx
+├── assets/             # Project/media assets
 ├── App.tsx
+├── MainLayout.tsx
 └── main.tsx
 ```
 
@@ -66,6 +82,9 @@ pnpm run dev
 
 # Build for production
 pnpm run build
+
+# Run lint checks
+pnpm run lint
 
 # Preview production build
 pnpm run preview
@@ -91,25 +110,30 @@ pnpm run preview
 
 ## Features
 
-1. **Hero Section**: Animated badge, gradient text, CTA button, logo cloud
-2. **Dashboard Panels**: Left (deployment status), Right (AI inference)
-3. **Software Lifecycle**: Interactive circular diagram with 7 stages
-4. **Capabilities**: 4-card bento grid with glow effects
-5. **Tech Partners**: Partner logo row with gradient separator
+1. **Multi-page routing**: Dedicated `Home`, `Projects`, and `Contact` pages via React Router.
+2. **Immersive hero and dashboard**: Animated glow layers, badge/CTA, logo cloud, and operational mockups.
+3. **Services and capability sections**: Lifecycle visualization, services, proactive core cards, founders, and tech partners.
+4. **Portfolio showcase**: Accent-themed project grid with metrics, tech stack tags, and outbound links.
+5. **Contact form workflow**: Validated form submission integrated with a Google Apps Script endpoint.
+6. **Shared site shell**: Reusable navbar/footer, animated layout glows, floating WhatsApp CTA, and route scroll restoration.
 
-## Key Components
+## Key Pages
 
-### SoftwareLifecycleSection
-- Circular orbital diagram with 7 lifecycle stages
-- Auto-advancing carousel (3 second intervals)
-- Detail card with progress indicator
-- Pause on hover
+### Home (`/`)
+- Hero + dashboard entry experience
+- Core service narrative sections
+- Partner and credibility blocks
 
-### ProactiveCoreSection
-- 4-card bento grid
-- Purple glow card styling
-- Agent mockup and metrics visualizations
+### Projects (`/projects`)
+- Curated project cards rendered from centralized content data
+- Visual accent variants (purple/orange/gradient)
+- External project links and metrics chips
+
+### Contact (`/contact`)
+- Company contact details
+- Form validation and async submission state
+- Success/error messaging feedback
 
 ## License
 
-Private - FourNotFour
+Private - Fornotfortech
