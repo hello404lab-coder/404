@@ -63,7 +63,7 @@ export function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.5, ease: EASE }}
         >
-          © 2026 FourNotFour. All rights reserved.
+          © 2026 ForNotForTech. All rights reserved.
         </motion.p>
       </div>
     </motion.footer>

@@ -1,10 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { BellIcon, GitBranchIcon } from '../icons'
+import { siteContent } from '../../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 export function LeftPanel() {
   const prefersReducedMotion = useReducedMotion()
+  const leftCard = siteContent.heroCards.left
 
   return (
     <motion.article
@@ -43,7 +45,7 @@ export function LeftPanel() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1, ease: EASE }}
           >
-            3 Active Deployments
+            {leftCard.label}
           </motion.h3>
           {/* Bell orb with 404 badge */}
           <div className="relative shrink-0">
@@ -112,10 +114,10 @@ export function LeftPanel() {
             </motion.div>
             <div className="ml-[18px]">
               <div className="text-[#f3eef6] text-[1.15rem] font-medium tracking-tighter">
-                Project: Tradovix
+                Admin Dashboard
               </div>
               <div className="mt-1 text-[rgba(193,172,176,0.86)] text-[0.86rem] tracking-[-0.03em]">
-                Build Status: Stable (99.9% Uptime)
+                {leftCard.description}
               </div>
             </div>
           </div>
@@ -134,7 +136,7 @@ export function LeftPanel() {
               whileHover={prefersReducedMotion ? {} : { scale: 1.02, boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 6px 16px rgba(0,0,0,0.4)' }}
               whileTap={{ scale: 0.98 }}
             >
-              View Logs
+              View Dashboard
             </motion.button>
             <motion.button
               className="h-16 border-0 rounded-full text-[#fff4e0] text-[0.96rem] font-semibold tracking-[-0.03em] cursor-pointer"
@@ -148,7 +150,7 @@ export function LeftPanel() {
               whileHover={prefersReducedMotion ? {} : { scale: 1.02, boxShadow: '0 12px 28px rgba(255,100,20,0.4), inset 0 1px 0 rgba(255,255,240,0.35)' }}
               whileTap={{ scale: 0.98 }}
             >
-              Scale Instance
+              Open App
             </motion.button>
           </div>
         </motion.div>
@@ -168,7 +170,7 @@ export function LeftPanel() {
             whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
-            View Pipeline
+            Web App Platform
           </motion.button>
         </div>
 
@@ -206,10 +208,10 @@ export function LeftPanel() {
             </motion.div>
             <div className="ml-[14px] flex w-full justify-between items-center">
               <div className="text-[rgba(239,234,243,0.88)] text-[0.95rem] tracking-[-0.03em]">
-                404 Bot
+                Web App
               </div>
               <div className="text-[rgba(187,178,194,0.68)] text-[0.84rem] tracking-[-0.03em]">
-                Current Sprint: Q2-26
+                {leftCard.tags.join(' · ')}
               </div>
             </div>
           </div>
