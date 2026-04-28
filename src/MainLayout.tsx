@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
+import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton'
 import { ScrollToTop } from './utils/ScrollToTop'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
@@ -105,6 +106,7 @@ export function MainLayout() {
         )}
         <Footer />
       </div>
+      <WhatsAppFloatingButton />
     </div>
   )
 }

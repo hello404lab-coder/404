@@ -49,7 +49,7 @@ export type FounderContent = {
 
 export const siteContent = {
   company: {
-    name: 'FourNotFour',
+    name: 'ForNotForTech',
     email: 'hello404lab@gmail.com',
     phone: '+91 94967 15606',
     location: 'Kochi, Kerala, India',

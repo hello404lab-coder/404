@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { NavPill } from './ui'
+import { siteContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -38,7 +39,7 @@ export function Navbar({
           transition={{ delay: 0.2, duration: 0.4 }}
           whileHover={{ color: 'rgba(255,255,255,1)' }}
         >
-          404
+          {siteContent.company.name}
         </motion.a>
       ) : (
         <motion.div
@@ -47,7 +48,7 @@ export function Navbar({
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.4 }}
         >
-          404
+          {siteContent.company.name}
         </motion.div>
       )}
       <NavPill />

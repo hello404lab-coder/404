@@ -154,17 +154,21 @@ function ProjectCard({
             <SparkleIcon className="w-3.5 h-3.5" />
             {project.category}
           </div>
-          <motion.button
+          <motion.a
             className="flex items-center justify-center w-9 h-9 rounded-full cursor-pointer"
             style={{
               background: 'rgba(255,255,255,0.05)',
               border: '1px solid rgba(255,255,255,0.1)',
             }}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${project.title} website`}
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
             whileTap={{ scale: 0.95 }}
           >
             <ArrowUpRightIcon className="w-4 h-4 text-[rgba(244,240,252,0.8)]" />
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* Title & Description */}
