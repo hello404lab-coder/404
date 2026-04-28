@@ -1,11 +1,15 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { SparkleIcon } from '../components/icons'
 import { LogoCloud } from '../components/ui'
+import { siteContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion()
+  const navigate = useNavigate()
+  const { hero, logos } = siteContent
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -66,7 +70,7 @@ export function HeroSection() {
         }}
       >
         <SparkleIcon />
-        <span>Next-Gen Software Lab</span>
+        <span>{hero.badge}</span>
       </motion.div>
 
       {/* Title */}
@@ -81,7 +85,7 @@ export function HeroSection() {
           backgroundClip: 'text',
         }}
       >
-        Finding Solutions Where Others See Errors.
+        {hero.headline}
       </motion.h1>
 
       {/* Subtitle */}
@@ -89,29 +93,63 @@ export function HeroSection() {
         variants={itemVariants}
         className="mt-[26px] mb-8 text-[rgba(178,170,190,0.88)] text-[0.97rem] font-normal tracking-[-0.02em] max-w-[600px] max-[1180px]:text-[0.9rem] max-[720px]:text-[0.85rem] max-[720px]:px-4"
       >
-        Custom software, AI integration, and scalable digital architecture designed for the modern enterprise.
+        {hero.subtext}
       </motion.p>
 
-      {/* CTA */}
-      <motion.button
-        variants={ctaVariants}
-        whileHover={prefersReducedMotion ? {} : { scale: 1.03, boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 30px rgba(220,85,255,0.9), 0 0 60px rgba(195,60,255,0.7), 0 0 120px rgba(165,30,248,0.5)' }}
-        whileTap={{ scale: 0.98 }}
-        className="h-[58px] px-11 rounded-full text-[#f2eaff] text-base font-medium tracking-[-0.03em] cursor-pointer max-[720px]:h-[50px] max-[720px]:px-8 max-[720px]:text-[0.9rem]"
-        style={{
-          border: '1.5px solid transparent',
-          background:
-            'linear-gradient(180deg, rgba(8,4,16,0.99), rgba(2,1,5,1)) padding-box, linear-gradient(145deg, rgba(200,90,255,0.92) 0%, rgba(230,100,255,0.96) 42%, rgba(200,78,255,0.92) 68%, rgba(150,45,245,0.88) 100%) border-box',
-          boxShadow:
-            'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 20px rgba(220,85,255,0.78), 0 0 50px rgba(195,60,255,0.58), 0 0 100px rgba(165,30,248,0.4), 0 0 160px rgba(130,12,225,0.22)',
-        }}
-        type="button"
+      <motion.p
+        variants={itemVariants}
+        className="mt-[-12px] mb-7 text-[rgba(178,168,196,0.76)] text-[0.9rem] font-normal tracking-[-0.015em] max-w-[560px] max-[720px]:text-[0.82rem] max-[720px]:px-4"
       >
-        Start Your Project
-      </motion.button>
+        {hero.audienceQualifier}
+      </motion.p>
+
+      <motion.div
+        variants={itemVariants}
+        className="flex items-center gap-4 max-[720px]:flex-col max-[720px]:gap-3"
+      >
+        <motion.button
+          variants={ctaVariants}
+          whileHover={prefersReducedMotion ? {} : { scale: 1.03, boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 30px rgba(220,85,255,0.9), 0 0 60px rgba(195,60,255,0.7), 0 0 120px rgba(165,30,248,0.5)' }}
+          whileTap={{ scale: 0.98 }}
+          className="h-[58px] px-11 rounded-full text-[#f2eaff] text-base font-medium tracking-[-0.03em] cursor-pointer max-[720px]:h-[50px] max-[720px]:px-8 max-[720px]:text-[0.9rem]"
+          style={{
+            border: '1.5px solid transparent',
+            background:
+              'linear-gradient(180deg, rgba(8,4,16,0.99), rgba(2,1,5,1)) padding-box, linear-gradient(145deg, rgba(200,90,255,0.92) 0%, rgba(230,100,255,0.96) 42%, rgba(200,78,255,0.92) 68%, rgba(150,45,245,0.88) 100%) border-box',
+            boxShadow:
+              'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 20px rgba(220,85,255,0.78), 0 0 50px rgba(195,60,255,0.58), 0 0 100px rgba(165,30,248,0.4), 0 0 160px rgba(130,12,225,0.22)',
+          }}
+          type="button"
+          onClick={() => navigate(hero.primaryCta.href)}
+        >
+          {hero.primaryCta.label}
+        </motion.button>
+        <motion.button
+          variants={ctaVariants}
+          whileHover={prefersReducedMotion ? {} : { scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
+          className="h-[58px] px-11 rounded-full text-[rgba(236,230,246,0.95)] text-base font-medium tracking-[-0.03em] cursor-pointer max-[720px]:h-[50px] max-[720px]:px-8 max-[720px]:text-[0.9rem]"
+          style={{
+            border: '1.5px solid rgba(220,205,245,0.42)',
+            background: 'rgba(15,8,24,0.5)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 28px rgba(120,56,188,0.25)',
+          }}
+          type="button"
+          onClick={() => navigate(hero.secondaryCta.href)}
+        >
+          {hero.secondaryCta.label}
+        </motion.button>
+      </motion.div>
+
+      <motion.p
+        variants={itemVariants}
+        className="mt-5 text-[rgba(178,168,196,0.66)] text-[0.84rem] font-normal tracking-[-0.01em] max-w-[620px] max-[720px]:text-[0.78rem] max-[720px]:px-4"
+      >
+        {hero.trustSignal}
+      </motion.p>
 
       <motion.div variants={itemVariants}>
-        <LogoCloud />
+        {logos.length > 0 ? <LogoCloud /> : null}
       </motion.div>
     </motion.section>
   )

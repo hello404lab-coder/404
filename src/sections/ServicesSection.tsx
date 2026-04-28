@@ -1,57 +1,48 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import type { ReactElement } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { SparkleIcon } from '../components/icons'
 import { siteContent, type ServiceContent } from '../data/siteContent'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
-const SERVICES = siteContent.services
+const SERVICES = siteContent.services.items
+const SERVICES_SECTION = siteContent.services.section
 
 const SERVICE_ICONS: Record<string, ReactElement> = {
-  software: (
+  web: (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M10 20H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-6" />
-      <path d="M10 20l-3-3m3 3l3-3m-3 3v-6" />
-      <path d="M6 8h12M6 12h8" />
+      <rect x="2.5" y="4" width="19" height="14" rx="2" />
+      <path d="M2.5 8h19M9 20h6M12 18v2" />
     </svg>
   ),
-  ai: (
+  mobile: (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 2a2 2 0 100 4 2 2 0 000-4z" />
-      <path d="M12 22a2 2 0 100-4 2 2 0 000 4z" />
-      <path d="M2 12a2 2 0 104 0 2 2 0 00-4 0z" />
-      <path d="M18 12a2 2 0 104 0 2 2 0 00-4 0z" />
-      <path d="M6 6l2 2M16 6l-2 2M6 18l2-2M16 18l-2-2" />
-      <circle cx="12" cy="12" r="3" />
+      <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
+      <path d="M10 5h4M11.25 18.5h1.5" />
     </svg>
   ),
-  blockchain: (
+  backend: (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <rect x="9" y="3" width="6" height="6" rx="1" />
-      <rect x="3" y="15" width="6" height="6" rx="1" />
-      <rect x="15" y="15" width="6" height="6" rx="1" />
-      <path d="M12 9v3M12 12H9m3 0h3M6 15v-1a2 2 0 012-2h8a2 2 0 012 2v1" />
+      <rect x="4" y="3.5" width="16" height="5" rx="1" />
+      <rect x="4" y="10.5" width="16" height="5" rx="1" />
+      <rect x="4" y="17.5" width="16" height="3" rx="1" />
+      <path d="M8 6h.01M8 13h.01M8 19h.01M12 6h6M12 13h6M12 19h6" />
     </svg>
   ),
-  agentic: (
+  ecommerce: (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z" />
-      <path d="M12 12l9-4.5" />
-      <path d="M12 12v9" />
-      <path d="M12 12L3 7.5" />
-      <circle cx="12" cy="12" r="2" />
+      <path d="M6 8h12l-1.1 11H7.1L6 8z" />
+      <path d="M9 8V6a3 3 0 016 0v2" />
+      <path d="M10 12h4" />
     </svg>
   ),
-  cloud: (
+  admin: (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M17.5 19H9a7 7 0 117-7h.5a5.5 5.5 0 110 11z" />
-      <path d="M12 12v8M8 16l4-4 4 4" />
-    </svg>
-  ),
-  security: (
-    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 3L4 7v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V7l-8-4z" />
-      <path d="M9 12l2 2 4-4" />
+      <rect x="3" y="3" width="8" height="8" rx="1.5" />
+      <rect x="13" y="3" width="8" height="5" rx="1.5" />
+      <rect x="13" y="10" width="8" height="11" rx="1.5" />
+      <rect x="3" y="13" width="8" height="8" rx="1.5" />
     </svg>
   ),
 }
@@ -231,6 +222,7 @@ function ServiceCard({
 
 export function ServicesSection() {
   const prefersReducedMotion = useReducedMotion()
+  const navigate = useNavigate()
 
   return (
     <section id="services" className="relative z-1 mt-20 px-[70px] max-[1180px]:px-7 max-[720px]:px-[18px] pb-20">
@@ -248,7 +240,7 @@ export function ServicesSection() {
       >
         <SparkleIcon />
         <span className="text-[rgba(200,170,255,0.9)] text-[0.78rem] font-medium tracking-[-0.01em]">
-          What We Build
+          {SERVICES_SECTION.badge}
         </span>
       </motion.div>
 
@@ -261,7 +253,7 @@ export function ServicesSection() {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
       >
-        Services That Scale
+        {SERVICES_SECTION.headline}
       </motion.h2>
 
       {/* Subtitle */}
@@ -272,7 +264,7 @@ export function ServicesSection() {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
       >
-        From concept to deployment, we engineer solutions that drive real business outcomes.
+        {SERVICES_SECTION.subtitle}
       </motion.p>
 
       {/* Services grid - 3 columns */}
@@ -305,6 +297,7 @@ export function ServicesSection() {
               'inset 0 1px 1px rgba(255,255,255,0.1), 0 0 20px rgba(220,85,255,0.5), 0 0 40px rgba(195,60,255,0.3)',
           }}
           type="button"
+          onClick={() => navigate(SERVICES_SECTION.ctaHref)}
           whileHover={
             prefersReducedMotion
               ? {}
@@ -316,7 +309,7 @@ export function ServicesSection() {
           }
           whileTap={{ scale: 0.98 }}
         >
-          Discuss Your Project
+          {SERVICES_SECTION.ctaLabel}
         </motion.button>
       </motion.div>
     </section>
