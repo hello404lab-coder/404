@@ -336,6 +336,42 @@ export const siteContent = {
         githubLink: 'https://github.com/fayasPA/amani-motors',
       },
       {
+        id: 'vuvl-ai',
+        title: 'Vuvl AI',
+        category: 'AI Education',
+        description:
+          'AI English tutor app built for Indian users with guided speaking practice and daily conversation support.',
+        problem:
+          'Learners needed practical spoken-English training adapted to Indian usage and real day-to-day scenarios.',
+        solution:
+          'Built an AI tutoring flow with voice-first practice, contextual role-play sessions, and clear progress tracking loops.',
+        metrics: ['Voice-led practice', 'Indian learner context', 'Daily progress loops'],
+        tech: ['AI Tutoring Engine', 'Realtime Voice', 'Role-play Flows', 'Progress Analytics'],
+        accent: 'gradient',
+        featured: true,
+        image: '/projects/vuvl-ai.svg',
+        link: 'https://luna.404lab.tech',
+        githubLink: null,
+      },
+      {
+        id: 'openclaw-agentic-ops',
+        title: 'OpenClaw Agentic Ops',
+        category: 'Business Automation',
+        description:
+          'Ongoing agentic operations platform using OpenClaw to automate repetitive business workflows with operator control.',
+        problem:
+          'Operations teams were losing time on repetitive approvals, status checks, and fragmented process handoffs.',
+        solution:
+          'Designed a human-in-the-loop automation system where OpenClaw agents execute routine operations and escalate edge cases.',
+        metrics: ['Automated workflow runs', 'Human approval gates', 'Unified operations console'],
+        tech: ['OpenClaw', 'Agent Orchestration', 'Workflow APIs', 'Operational Dashboard'],
+        accent: 'orange',
+        featured: true,
+        image: '/projects/openclaw-agentic-ops.svg',
+        link: '',
+        githubLink: null,
+      },
+      {
         id: 'luxemoto',
         title: 'LuxeMoto',
         category: 'Auto E-commerce',

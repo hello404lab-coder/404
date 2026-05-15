@@ -87,9 +87,7 @@ function ProjectCard({
 
   return (
     <motion.div
-      className={`relative rounded-[28px] overflow-hidden will-change-transform h-full flex flex-col ${
-        project.featured ? 'col-span-2 max-[1180px]:col-span-1 max-[720px]:col-span-1' : 'col-span-1'
-      }`}
+      className="relative rounded-[28px] overflow-hidden will-change-transform h-full flex flex-col col-span-1"
       style={{
         border: styles.border,
         background: styles.background,

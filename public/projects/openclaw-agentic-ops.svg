@@ -1,0 +1,53 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="180" y1="100" x2="1420" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#170C16"/>
+      <stop offset="1" stop-color="#090507"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1240 250) rotate(132) scale(580 340)">
+      <stop stop-color="#FF8A34" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#FF8A34" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(340 700) rotate(22) scale(560 340)">
+      <stop stop-color="#A855F7" stop-opacity="0.52"/>
+      <stop offset="1" stop-color="#A855F7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#211113" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#12090B" stop-opacity="0.84"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <rect x="190" y="150" width="1220" height="600" rx="44" fill="url(#panel)" stroke="#FF8A34" stroke-opacity="0.4"/>
+  <rect x="230" y="194" width="1140" height="62" rx="18" fill="#2C1714" fill-opacity="0.78" stroke="#FF8A34" stroke-opacity="0.3"/>
+
+  <circle cx="282" cy="225" r="10" fill="#FF8A34" fill-opacity="0.8"/>
+  <circle cx="320" cy="225" r="10" fill="#A855F7" fill-opacity="0.7"/>
+  <circle cx="358" cy="225" r="10" fill="#FFD59E" fill-opacity="0.7"/>
+
+  <rect x="270" y="302" width="280" height="178" rx="24" fill="#2A1716" fill-opacity="0.85" stroke="#FF8A34" stroke-opacity="0.42"/>
+  <rect x="300" y="334" width="220" height="20" rx="10" fill="#F6D9BE" fill-opacity="0.74"/>
+  <rect x="300" y="370" width="184" height="18" rx="9" fill="#D6B8A3" fill-opacity="0.58"/>
+  <rect x="300" y="404" width="204" height="18" rx="9" fill="#D6B8A3" fill-opacity="0.42"/>
+
+  <rect x="600" y="302" width="280" height="178" rx="24" fill="#221326" fill-opacity="0.85" stroke="#A855F7" stroke-opacity="0.44"/>
+  <rect x="630" y="334" width="220" height="20" rx="10" fill="#E5D3FF" fill-opacity="0.74"/>
+  <rect x="630" y="370" width="184" height="18" rx="9" fill="#C6A8E8" fill-opacity="0.58"/>
+  <rect x="630" y="404" width="204" height="18" rx="9" fill="#C6A8E8" fill-opacity="0.42"/>
+
+  <rect x="930" y="302" width="400" height="288" rx="28" fill="#1D1316" fill-opacity="0.88" stroke="#FFB46E" stroke-opacity="0.36"/>
+  <rect x="968" y="344" width="324" height="24" rx="12" fill="#FFE2C5" fill-opacity="0.78"/>
+  <rect x="968" y="386" width="280" height="20" rx="10" fill="#D6B8A3" fill-opacity="0.52"/>
+  <rect x="968" y="440" width="240" height="66" rx="16" fill="#FF8A34" fill-opacity="0.18" stroke="#FF8A34" stroke-opacity="0.6"/>
+  <rect x="1224" y="440" width="68" height="66" rx="16" fill="#A855F7" fill-opacity="0.18" stroke="#A855F7" stroke-opacity="0.6"/>
+
+  <path d="M550 391H600" stroke="#FF8A34" stroke-opacity="0.55" stroke-width="4" stroke-linecap="round"/>
+  <path d="M880 391H930" stroke="#A855F7" stroke-opacity="0.55" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="270" y="566" fill="#F9EFDE" font-size="44" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700">OpenClaw Agentic Ops</text>
+  <text x="270" y="618" fill="#E2C9B6" font-size="28" font-family="system-ui, -apple-system, Segoe UI, sans-serif">Automated business operations with human approval gates</text>
+</svg>
