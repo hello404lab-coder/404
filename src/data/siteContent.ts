@@ -515,7 +515,7 @@ export const siteContent = {
         tech: ['Flutter', 'Backend APIs', 'PostgreSQL'],
         accent: 'purple',
         featured: true,
-        image: '/projects/confidential-delivery-platform.jpg',
+        image: '/projects/confidential-delivery-platform.svg',
         link: '',
         githubLink: null,
       },
